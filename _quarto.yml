@@ -19,7 +19,7 @@ website:
       - href: blog/index.qmd
         text: Blog
     right:
-      - href: https://github.com/tranlevantra/personal_website
+      - href: https://github.com/tranlevantra/tranlevantra.github.io
         icon: github
         
   sidebar:

@@ -43,7 +43,6 @@ With some familiarity in R, `dplyr`, and `sf` packages — you can recreate simi
 ## Execution
 
 ::: {.callout-note collapse="true" title="Resources (to work with spatial vector data in R)"}
-
 You need R, RStudio, and some packages to get started. If you are completely new, I recommend resources from [RLadies Sydney](https://rladiessydney.org/courses/) (`BasicBasics` and `CleanItUp` units are must-read).
 
 In R, Working with tabular data using [`dplyr`](https://dplyr.tidyverse.org) package is straightforward, `|>`or`%>%` pipe operators and these functions: [`mutate`](https://dplyr.tidyverse.org/reference/mutate.html), [`select`](https://dplyr.tidyverse.org/reference/select.html), [`filter`](https://dplyr.tidyverse.org/reference/filter.html) and [`group_by`](https://dplyr.tidyverse.org/reference/group_by.html) along with 4 types of [`join`](https://dplyr.tidyverse.org/reference/mutate-joins.html) should get you far.
@@ -53,12 +52,13 @@ The most popular package to work with spatial data in R is [`sf`](https://r-spat
 
 ### 1. Preparing data
 
-
 This stage involves:
 
 -   Retrieving population data from the Australian Bureau of Statistics (ABS): ABS provides population counts at the smallest level - [Mesh Block](https://www.abs.gov.au/census/guide-census-data/mesh-block-counts/latest-release#data-download), along with [allocation file](https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/allocation-files) for mapping among levels, and [shapefiles](https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files) for each level. By joining these files[^2], a shapefile with population counts of any level can be created.
 
 -   Choosing a resolution for the population dots (e.g., 1 dot = 100 people)
+
+[^2]: ![*4 types of JOIN*. Trust-me-bro (n.d.).](fig/joins.webp){width="30%"}
 
 ```{r}
 #| echo: true
@@ -70,13 +70,11 @@ SA1_count_shapefile |>                          # <1>
 
 ```
 
-1. `SA1_count_shapefile` includes population counts `Person`, and polygon `Geometry` for each SA1 block (see below).
+1.  `SA1_count_shapefile` includes population counts `Person`, and polygon `Geometry` for each SA1 block (see below).
 
 2.  `n_dots` is the number of population dots to generate per SA1 polygon, calculated as `floor(Person / 100)`. This resolution (1 dot = 100 people) is chosen because most SA1s have between 200 and 800 people, resulting in 2 to 8 dots per block. Using `floor()` ensures we only generate whole dots and prevents overcounting.
 
 3.  Optionally, to reduce computation time, `filter(n_dots > 0)` is to skip blocks with zero population.
-
-[^2]: ![*4 types of JOIN*. Trust-me-bro (n.d.).](fig/joins.webp){width="30%"}
 
 Output of this stage should be an `sf` object with polygons and number of dots for each polygon.
 

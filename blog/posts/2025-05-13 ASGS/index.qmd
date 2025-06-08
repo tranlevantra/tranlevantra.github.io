@@ -25,7 +25,7 @@ format:
 The **Main Structure** of Australian Statistical Geography Standard (ASGS) ${3}^{th}$ Edition has **7 levels**, and is developed based on the concept of a functional area - an area within which many people commute or travel to access services.
 
 | **Geographic Level** | **Population Range** | **Composition** | **Primary Use** |
-|------------------|------------------|------------------|-------------------|
+|----|----|----|----|
 | Mesh Block (MB) | 30–60 dwellings | Smallest classification with 368,286 units | Foundation for all ASGS levels |
 | Statistical Area Level 1 (SA1) | 200–800 people | Built from 61,845 Mesh Blocks | Detailed Census dissemination |
 | Statistical Area Level 2 (SA2) | 3,000–25,000 people | Built from 2,475 SA1s | Community health & service stats |
@@ -51,11 +51,13 @@ While Greater Capital City Statistical Areas (GCCSA) are not a part of the ASGS,
 
 </iframe>
 
+```{=html}
 <figcaption  font-size: 0.9em; color: gray;">
 
 An overview of the Main Structure (may take a few seconds to load.
 ). Filter map layers and Adjust zoom in/out options for better understanding
 </figcaption>
+```
 
 </figure>
 

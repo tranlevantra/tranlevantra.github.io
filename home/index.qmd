@@ -15,9 +15,6 @@ about:
     - icon: envelope
       text: Email
       href: mailto:tranlevantra@gmail.com
-    
 ---
 
 I’m **Trà** — originally from **Vietnam**, now living in **Australia**. Besides */Chah/*, I also go by **Tea** (*Trà* means *tea* in Vietnamese) or **April** (my birth month).
-
-

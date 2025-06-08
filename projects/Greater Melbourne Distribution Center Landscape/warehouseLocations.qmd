@@ -24,14 +24,12 @@ points_sf <- read_sf("resources/points_sf/points_sf.shp")
 ```
 
 ::: {.callout-note collapse="true" title="Resources (to work with spatial vector data in R)"}
-
 You need R, RStudio, and some packages to get started. If you are completely new, I recommend resources from [RLadies Sydney](https://rladiessydney.org/courses/) (`BasicBasics` and `CleanItUp` units are must-read).
 
 In R, Working with tabular data using [`dplyr`](https://dplyr.tidyverse.org) package is straightforward, `|>`or`%>%` pipe operators and these functions: [`mutate`](https://dplyr.tidyverse.org/reference/mutate.html), [`select`](https://dplyr.tidyverse.org/reference/select.html), [`filter`](https://dplyr.tidyverse.org/reference/filter.html) and [`group_by`](https://dplyr.tidyverse.org/reference/group_by.html) along with 4 types of [`join`](https://dplyr.tidyverse.org/reference/mutate-joins.html) should get you far.
 
 The most popular package to work with spatial data in R is [`sf`](https://r-spatial.github.io/sf/). An `sf` object extends regular tabular data frames to include a geometry column, which contains the spatial information. Thus, a simple explanation on [how to read shapefiles](https://r-graph-gallery.com/168-load-a-shape-file-into-r.html) with `sf` should be enough to get you started. Then, those mentioned `dplyr` functions will come in handy.
 :::
-
 
 ## Motivation
 
