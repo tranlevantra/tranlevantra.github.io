@@ -1,0 +1,535 @@
+[
+  {
+    "objectID": "blog/index.html",
+    "href": "blog/index.html",
+    "title": "Welcome to my Blog",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nThe Main Structure of Australian Statistical Geography Standard (ASGS) Third Edition\n\n\n\n\n\nA framework to collect, analyse and disseminate statistical data based on social geography - the distribution of people and communities, rather than administrative bounderies\n\n\n\n\n\nMay 13, 2025\n\n\nTra Tran\n\n\n3 min\n\n\n\n\n\n\n\n\n\n\n\n\nI photoshoped my Testamur\n\n\n\n\n\n\n\n\n\n\n\nDecember 18, 2024\n\n\nTra Tran\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nOn model performance assessment in binary classification tasks\n\n\n\n\n\nA reflection on the often-neglected aspects of model performance assessment in binary classification tasks\n\n\n\n\n\nDecember 11, 2024\n\n\nTra Tran\n\n\n6 min\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "home/index.html",
+    "href": "home/index.html",
+    "title": "Tra Tran",
+    "section": "",
+    "text": "I’m Trà — originally from Vietnam, now living in Australia. Besides /Chah/, I also go by Tea (Trà means tea in Vietnamese) or April (my birth month)."
+  },
+  {
+    "objectID": "home/index.html#education",
+    "href": "home/index.html#education",
+    "title": "Tra Tran",
+    "section": "🎓 Education",
+    "text": "🎓 Education\nRMIT University — Melbourne, Australia\nMaster of Statistics & Operations Research\nMarch 2023 – December 2024\nRMIT University Vietnam — Hanoi, Vietnam\nBachelor of Logistics & Supply Chain Management\nOctober 2017 – May 2022"
+  },
+  {
+    "objectID": "blog/posts/2024-12-11 decision threshold/index.html",
+    "href": "blog/posts/2024-12-11 decision threshold/index.html",
+    "title": "On model performance assessment in binary classification tasks",
+    "section": "",
+    "text": "Thank you, Asma Ali and Thomas Bui for your insightful feedback"
+  },
+  {
+    "objectID": "blog/posts/2024-12-11 decision threshold/index.html#before-we-start",
+    "href": "blog/posts/2024-12-11 decision threshold/index.html#before-we-start",
+    "title": "On model performance assessment in binary classification tasks",
+    "section": "Before We Start",
+    "text": "Before We Start\nThis article is aimed at those with some background in Machine Learning as it assumes the reader is familiar with the concepts of binary classification, model training, and evaluation metrics. Some refreshment is provided below.\n\n\n\n\n\n\nQuick Refresher: Model Performance Assessment in Binary Classification Tasks\n\n\n\n\n\nBinary classification is a supervised learning task where the goal is to classify observations into one of two classes (0 or 1). For instance, in a medical diagnosis task, the model is trained to predict whether a patient has a disease (1) or not (0).\nThere are two types of training algorithms for binary classification:\n\nProbability based algorithms (logistic regression, support vector machines with a sigmoid kernel, neural networks with a sigmoid activation function, etc.) which output probability - a value between 0 and 1 indicating the likelihood of an observation belonging to the positive class (1)\nAnd Decision based algorithms (tree-based algorithms, etc.) which output a class label directly.\n\nIn reality, probability outputs are preferred because they provide more information about the uncertainty of the prediction. Nevertheless, decision based algorithms can output probabilities by using calibration methods when required.\nAfter training, the model is evaluated on a test dataset to assess its performance. The evaluation process typically involves converting the predicted probabilities into class labels using a decision threshold, and then calculating various performance metrics based on the confusion matrix.\nIn details,\nDecision Threshold: is a value between 0 and 1 such that if the probability output is greater than or equal to the decision threshold, the observation is classified as the positive class (1); otherwise, it is classified as the negative class (0).\nConfusion matrix: is obtained by comparing the predicted class labels from the model with the actual class labels (0 or 1) in the test dataset. It shows the counts of:\n\nTrue Positive (TP): The number of positive (1) instances correctly predicted as positive (1).\nTrue Negative (TN): The number of negative (0) instances correctly predicted as negative (0).\nFalse Positive (FP): The number of negative (0) instances incorrectly predicted as positive (1).\nFalse Negative (FN): The number of positive (1) instances incorrectly predicted as negative (0)."
+  },
+  {
+    "objectID": "blog/posts/2024-12-11 decision threshold/index.html#unpopular-opinions-on-binary-classification-assessment",
+    "href": "blog/posts/2024-12-11 decision threshold/index.html#unpopular-opinions-on-binary-classification-assessment",
+    "title": "On model performance assessment in binary classification tasks",
+    "section": "Unpopular Opinions on Binary Classification Assessment",
+    "text": "Unpopular Opinions on Binary Classification Assessment\n\nCalibration is an often-neglected aspect when assessing the performance of classification models\nAccuracy is just one of many evaluation metrics — a high accuracy alone doesn’t guarantee good real-world performance, especially in imbalanced datasets.\nWhile ROC curves are helpful for sensitivity analysis and threshold selection, interpreting them isn’t always straightforward, particularly when misclassification costs are unequal.\n\n\nCalibration metrics\nCalibration metrics in classification tasks evaluate how close the model’s predicted probabilities are to the true class labels (0 or 1), indicating the model’s reliability in estimating probabilities.\nFor example, in healthcare applications, a well-calibrated model would assign probabilities that closely reflect the true likelihood of disease presence or absence.\nSome of the most common calibration metrics are:\n\nThe mean squared difference between predicted probabilities and actual class labels.\n\\[\n\\text{Brier Score} = \\frac{1}{n} \\sum_{i=1}^{n} (P_i - o_i)^2\n\\]\nThe negative log-likelihood of the predicted probabilities given the actual class labels.\n\\[\n\\text{Log Loss} = -\\frac{1}{n} \\sum_{i=1}^{n} \\left[ o_i \\log(P_i) + (1 - o_i) \\log(1 - P_i) \\right]\n\\]\nThe root mean squared difference between predicted probabilities and actual class labels.\n\\[\n\\text{RMS Calibration Error} = \\sqrt{ \\frac{1}{n} \\sum_{i=1}^{n} (P_i - o_i)^2 }\n\\]\n\nWhile the above metrics are useful for evaluating a model’s overall calibration, they don’t reveal how the model performs on each class individually. That’s why visualising predicted probabilities against actual class labels — as done in a reliability diagram (example in Figure 1 below)— is essential for uncovering insights that metrics alone might miss.\n\n\n\nFigure 1. The negative class (0) shows good calibration, with predicted probabilities tightly clustered around the actual class label. In contrast, the positive class (1) shows poorer calibration, with greater variability.\n\n\n\n\nAccuracy Metrics\nThese metrics are calculated after converting predicted probabilities to class labels (0 or 1) using the decision threshold.\n\nAccuracy: \\(\\frac{TP + TN}{TP + TN + FP + FN}\\)\nSensitivity (True Positive Rate, Recall): \\(\\frac{TP}{TP + FN}\\)\nSpecificity (True Negative Rate): \\(\\frac{TN}{TN + FP}\\)\nPrecision (Positive Predictive Value): \\(\\frac{TP}{TP + FP}\\)\nFalse Positive Rate (FPR): \\(\\frac{FP}{FP + TN}\\)\nF1 Score: \\(2 \\cdot \\frac{\\text{Precision} \\cdot \\text{Recall}}{\\text{Precision} + \\text{Recall}}\\)\nBalanced Accuracy: \\(\\frac{\\text{Sensitivity} + \\text{Specificity}}{2}\\)\nAnd many more …\n\nThese metrics give a fuller picture than accuracy alone, especially in imbalanced datasets where the number of instances in one class outweighs the other.\nFor example, in a breast cancer classification dataset where 90% of the instances are cancer-free (class 0) and only 10% have cancer (class 1), a model that predicts everyone to be cancer-free would still achieve 90% accuracy. However, such a model would be useless, as it fails to identify any actual cancer cases.\n\n\n\nFigure 2: An example of model performance on test data at the commonly used threshold of 0.5. The model achieves 90% accuracy but fails to detect the single positive case.\n\n\n\n\nSensitivity analysis\nROC Curve plots the true positive rate (sensitivity) against the false positive rate (1 - specificity) at various thresholds to reveal how sensitive the model is to changes in the decision threshold for each class.\n\n\n\nFigure 3: This ROC curve suggests the model performs poorly across most thresholds. It only identifies positives at very low thresholds, with a high false positive rate. Overall, the model struggles to separate the classes effectively\n\n\nThe optimal decision threshold is often chosen near the top-left corner of the ROC curve, where sensitivity and specificity are balanced. However, this assumes equal costs for false positives and false negatives — which is rarely the case.\nIn breast cancer screening, for example, missing a cancer case (false negative) is more serious than flagging a healthy person (false positive). In such cases, the threshold is lowered to prioritize detecting positives, making ROC interpretation less straightforward.\nFigure 4 shows the same model as in Figure 3, with reliability diagram and a confusion matrix that updates with the threshold — making it easier to see how model’s performance changes.\n\n\n\nFigure 4: From the reliability diagram, varying the threshold dynamically reveals how lowering it reduce false negatives while increase false positives. The confusion matrix further highlights how sensitive the two classes are to changes in threshold"
+  },
+  {
+    "objectID": "blog/posts/2024-12-11 decision threshold/index.html#some-notes",
+    "href": "blog/posts/2024-12-11 decision threshold/index.html#some-notes",
+    "title": "On model performance assessment in binary classification tasks",
+    "section": "Some Notes",
+    "text": "Some Notes\nThis article isn’t an exhaustive guide to model performance in binary classification, but a reflection on often overlooked aspects — especially calibration metrics and sensitivity to decision thresholds.\nThe idea of plotting predicted probabilities against actual labels (reliability diagrams) comes from my own experimentation. All visualisations were created in R using ggplot2. Data and code are available here."
+  },
+  {
+    "objectID": "blog/posts/2024-12-18 testamur/index.html",
+    "href": "blog/posts/2024-12-18 testamur/index.html",
+    "title": "I photoshoped my Testamur",
+    "section": "",
+    "text": "Long story short: the name on my testamur originally appeared as “Tran Le Van Tra” — a version adjusted to English naming conventions.\nBut my parents don’t speak English, and my name might be the only thing they recognize on that piece of paper. So I photoshoped it — to Trần Lê Vân Trà.\nTo honor them. For all the sacrifices they made so I could be here today.\n\n\n\nA little tribute to where I came from — and who I did this for.\n\n\nAnd… to flex a little, too 😌\nSome say “Masters is just delayed unemployment”, but to me, it’s a privilege to study, to learn, and to grow.\nWith a bachelor’s degree in business and no prior training in advanced mathematics, the biggest achievement of these past two years has been learning math from the ground up and now, diving into advanced concepts in statistics with confidence.\nYes, I’ve been nerdy. I’ve spent most of these two years studying. But that, too, is a kind of employment."
+  },
+  {
+    "objectID": "project/index.html",
+    "href": "project/index.html",
+    "title": "My Project Listings",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\nindex\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about/index.html",
+    "href": "about/index.html",
+    "title": "👋 Let’s Get to Know Me Better!",
+    "section": "",
+    "text": "I was born and raised in Northwestern Vietnam — the mountainous region of quiet beauty and the most kind-hearted people.\n\n\n\nRMIT University — Melbourne, Australia\nMaster of Statistics & Operations Research\nMarch 2023 – December 2024\nRMIT University Vietnam — Hanoi, Vietnam\nBachelor of Logistics & Supply Chain Management\nOctober 2017 – May 2022\n\n\n\n\nI began as an Operations Intern at Toyota Vietnam, working in the warehouse to ensure spare parts arrived on time, in the right place, quantity, and condition. Maybe I’m biased, but Toyota’s low-tech warehouse management system — Kanban(paper cards) — could manage complex workflows better than any fancy software.\nLater, I joined BSS Group as a Manual Software Tester, writing and executing test plans. As someone new to software development, I was lucky to have incredibly patient and supportive mentors. If I ever get the chance to mentor someone, I’ll strive to be the same.\nBoth roles were detail-focused and taught me patience. But I craved something more analytical and math-driven — so I pursued a graduate degree in Statistics, right after completing my Business degree."
+  },
+  {
+    "objectID": "about/index.html#lets-get-to-know-me-better",
+    "href": "about/index.html#lets-get-to-know-me-better",
+    "title": "Tra Tran",
+    "section": "",
+    "text": "I was born and raised in Northwestern Vietnam — the mountainous region of quiet beauty and the most kind-hearted people.\n\n\nI like to do math, to cook, and to code.\n(Yes, in that order.)"
+  },
+  {
+    "objectID": "about/index.html#math",
+    "href": "about/index.html#math",
+    "title": "Tra Tran",
+    "section": "🧠 MATH",
+    "text": "🧠 MATH\nI’m a nerd — no doubt about it. But I have an explanation. Some people hit the gym to stay fit; I started solving math problems to keep my brain agile and sharp. And it’s funny — the more you do it, the more you want to do it. That’s how I ended up here.\nThe kind of math I study is statistics — not pure math, but a mathematical science nonetheless. I feel incredibly grateful to study math at this level. And as cliché as it sounds: the more I learn, the more I realize how little I actually know.\n\n\n\n💡 A key result in probability theory underpinning many important statistical applications that deserves more attention\n\n\nBecause AI and machine learning are trending — and statistics is their backbone — here are some resources on the math of data science (tested and approved by a nerd 🤓):\n\n📐 Calculus\n\nBook: Calculus by James Stewart\nCourse: MIT OpenCourseWare\n\nSingle Variable Calculus\n\nMultivariable Calculus\n\n\nA fun, intuitive approach: Khan Academy\n\nIntegral Calculus\n\nDifferential Calculus\n\nMultivariable Calculus\n\n\n\n\n📊 Linear Algebra\n\nBook: Linear Algebra with Applications by Steven J. Leon\nCourse: MIT OCW 18.06 Linear Algebra\n\nVisual & intuitive: Math for Game Devs by Freya Holmer — she’s so cute, love her 😍\n\n\n\n📈 Mathematical Statistics\nI absolutely adore 📘 Statistical Inference by Casella and Berger, and I’ve set my sights next on 📗 Probability and Measure by Patrick Billingsley.\nAttached links are free content available on the internet. But if you want to support the authors, please consider buying the books!😉"
+  },
+  {
+    "objectID": "about/index.html#cooking",
+    "href": "about/index.html#cooking",
+    "title": "Tra Tran",
+    "section": "🍜 COOKING",
+    "text": "🍜 COOKING\nMy cooking journey began a long time ago. My parents work incredibly hard to provide for us, and as the oldest sister, I naturally found myself in the kitchen early on.\nThings really leveled up when I moved to Australia — I began cooking exquisite Vietnamese dishes to share my culture with new friends, soothe my homesickness, and explore cuisines from around the world.\nMy inspiration? This lovely collection from VnExpress. It’s in Vietnamese, but three things transcend all language barriers — love, music, and yes… food! ❤️🎶🍲"
+  },
+  {
+    "objectID": "about/index.html#coding",
+    "href": "about/index.html#coding",
+    "title": "Tra Tran",
+    "section": "💻 CODING",
+    "text": "💻 CODING\nI’m still new to coding — and feel so lucky that auto-completion, Copilot, and ChatGPT were already around when I began.\nMy favorite language so far is Java — it’s declarative, easy to read, and has just the right amount of strictness to catch bugs early. But the language I’m most fluent in is R, because I study Statistics — and R was developed by statisticians, for statisticians 📈.\nArguing about which programming language is “better” feels a bit pointless to me. Languages are tools, and each serves a different purpose. What matters is what you build with them.\nI do wish I’d taken Data Structures and Algorithms in school — It’s all good, there’s an abundance of amazing online resources now. 📚💻"
+  },
+  {
+    "objectID": "home/index.html#hello",
+    "href": "home/index.html#hello",
+    "title": "Tra Tran",
+    "section": "",
+    "text": "I’m Trà — originally from Vietnam, now living in Australia. Aside from /Chah/, I also go by Tea or April.\n☕ Tea means Trà in Vietnamese,\n🌼 April is my English name — chosen for my birth month, and because it just felt right."
+  },
+  {
+    "objectID": "about/index.html#background",
+    "href": "about/index.html#background",
+    "title": "👋 Let’s Get to Know Me Better!",
+    "section": "",
+    "text": "I was born and raised in Northwestern Vietnam — the mountainous region of quiet beauty and the most kind-hearted people.\n\n\n\nRMIT University — Melbourne, Australia\nMaster of Statistics & Operations Research\nMarch 2023 – December 2024\nRMIT University Vietnam — Hanoi, Vietnam\nBachelor of Logistics & Supply Chain Management\nOctober 2017 – May 2022\n\n\n\n\nI began as an Operations Intern at Toyota Vietnam, working in the warehouse to ensure spare parts arrived on time, in the right place, quantity, and condition. Maybe I’m biased, but Toyota’s low-tech warehouse management system — Kanban(paper cards) — could manage complex workflows better than any fancy software.\nLater, I joined BSS Group as a Manual Software Tester, writing and executing test plans. As someone new to software development, I was lucky to have incredibly patient and supportive mentors. If I ever get the chance to mentor someone, I’ll strive to be the same.\nBoth roles were detail-focused and taught me patience. But I craved something more analytical and math-driven — so I pursued a graduate degree in Statistics, right after completing my Business degree."
+  },
+  {
+    "objectID": "about/index.html#some-of-my-favorite-things",
+    "href": "about/index.html#some-of-my-favorite-things",
+    "title": "👋 Let’s Get to Know Me Better!",
+    "section": "🥰 Some of My Favorite Things",
+    "text": "🥰 Some of My Favorite Things\n\nI like to do math, to cook, and to code.\n(Yes, in that order.)\n\n\n🧠 MATH\nI solve math problems in my free time — I’m a nerd, no doubt! The kind of math I study is statistics — not pure math, but a mathematical science nonetheless. I feel incredibly grateful to study math at this level. And as cliché as it sounds: the more I learn, the more I realize how little I actually know.\n\n\n\n💡 A key result in probability theory underpinning many important statistical applications that deserves more attention\n\n\nBecause AI and machine learning are trending — and statistics is their backbone — here are some resources on the math of data science (tested and approved by a nerd 🤓):\n\n📐 Calculus\n\nBook: Calculus by James Stewart\nCourse: MIT OpenCourseWare\n\nSingle Variable Calculus\n\nMultivariable Calculus\n\n\nA fun, intuitive approach: Khan Academy\n\nIntegral Calculus\n\nDifferential Calculus\n\nMultivariable Calculus\n\n\n\n\n📊 Linear Algebra\n\nBook: Linear Algebra with Applications by Steven J. Leon\nCourse: MIT OCW 18.06 Linear Algebra\n\nVisual & intuitive: Math for Game Devs by Freya Holmer — she’s so cute, love her 😍\n\n\n\n📈 Mathematical Statistics\nI absolutely adore 📘 Statistical Inference by Casella and Berger, and I’ve set my sights next on 📗 Probability and Measure by Patrick Billingsley.\nAttached links are free content available on the internet. But if you want to support the authors, please consider buying the books!😉\n\n\n\n\n🍜 COOKING\nMy cooking journey began a long time ago. My parents work incredibly hard to provide for us, and as the oldest sister, I naturally found myself in the kitchen early on.\nThings really leveled up when I moved to Australia — I began cooking exquisite Vietnamese dishes to share my culture with new friends, soothe my homesickness, and explore cuisines from around the world.\nMy inspiration? This lovely collection from VnExpress. It’s in Vietnamese, but three things transcend all language barriers — love, music, and yes… food! ❤️🎶🍲\n\n\n\n💻 CODING\nI’m still new to coding — and feel so lucky that auto-completion, Copilot, and ChatGPT were already around when I began.\nMy favorite language so far is Java — it’s declarative, easy to read, and has just the right amount of strictness to catch bugs early. But the language I’m most fluent in is R, because I study Statistics — and R was developed by statisticians, for statisticians 📈.\nArguing about which programming language is “better” feels a bit pointless to me. Languages are tools, and each serves a different purpose. What matters is what you build with them.\nI do wish I’d taken Data Structures and Algorithms in school — It’s all good, there’s an abundance of amazing online resources now. 📚💻"
+  },
+  {
+    "objectID": "projects/index.html",
+    "href": "projects/index.html",
+    "title": "My Project Listing",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nFullfillment Centers in Greater Melbourne\n\n\nA research into Fulfillment Center landscape of Greater Melbourne\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "blog/posts/2024-12-11 decision threshold/linkedin.html",
+    "href": "blog/posts/2024-12-11 decision threshold/linkedin.html",
+    "title": "linkedin",
+    "section": "",
+    "text": "Binary classification is a common task in machine learning. Here are some important points to keep in mind when evaluating binary classifiers:\n\nCalibration is an often-neglected aspect when assessing the performance of classification models\nAccuracy is just one of many evaluation metrics — a high accuracy alone doesn’t guarantee good real-world performance.\nWhile ROC curves are popular, they are so confusing. There is a better alternative: the precision-recall curve."
+  },
+  {
+    "objectID": "projects/posts/Greater Melbourne Distribution Center Landscape/index.html",
+    "href": "projects/posts/Greater Melbourne Distribution Center Landscape/index.html",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "",
+    "text": "This project aims to analyze the distribution center landscape in the Greater Melbourne area and point out changes in the landscape post-COVID-19. The analysis will focus on the following aspects:\n\nDistribution center locations\nDistribution center sizes"
+  },
+  {
+    "objectID": "projects/posts/Greater Melbourne Distribution Center Landscape/index.html#background",
+    "href": "projects/posts/Greater Melbourne Distribution Center Landscape/index.html#background",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "",
+    "text": "This project aims to analyze the distribution center landscape in the Greater Melbourne area and point out changes in the landscape post-COVID-19. The analysis will focus on the following aspects:\n\nDistribution center locations\nDistribution center sizes"
+  },
+  {
+    "objectID": "projects/posts/Greater Melbourne Distribution Center Landscape/analysis.html",
+    "href": "projects/posts/Greater Melbourne Distribution Center Landscape/analysis.html",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "",
+    "text": "This project aims to analyze the distribution center landscape in the Greater Melbourne area and point out changes in the landscape post-COVID-19. The analysis will focus on the following aspects:\n\nDistribution center locations\nDistribution center sizes"
+  },
+  {
+    "objectID": "projects/posts/Greater Melbourne Distribution Center Landscape/analysis.html#background",
+    "href": "projects/posts/Greater Melbourne Distribution Center Landscape/analysis.html#background",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "",
+    "text": "This project aims to analyze the distribution center landscape in the Greater Melbourne area and point out changes in the landscape post-COVID-19. The analysis will focus on the following aspects:\n\nDistribution center locations\nDistribution center sizes"
+  },
+  {
+    "objectID": "projects/posts/Greater Melbourne Distribution Center Landscape/analysis.html#population-density",
+    "href": "projects/posts/Greater Melbourne Distribution Center Landscape/analysis.html#population-density",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "Population Density",
+    "text": "Population Density\nPopulation density is a key factor in determining the location of distribution centers."
+  },
+  {
+    "objectID": "projects/posts/Greater Melbourne Distribution Center Landscape/analysis.html#findings",
+    "href": "projects/posts/Greater Melbourne Distribution Center Landscape/analysis.html#findings",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "Findings",
+    "text": "Findings\n\nMore inhouse Fullfillment Centers as businesses are moving towards securing their own supply chains to deal with disruptions and uncertainties.\nThe warehouse zone is get crowded with more and more distribution centers. In the near future, unoccupied land across the Sunburry line will become hotspot for new warehouses thanks to its accessibility to the metropolitan zone."
+  },
+  {
+    "objectID": "projects/posts/Greater Melbourne Distribution Center Landscape/analysis.html#distribution-center-locations",
+    "href": "projects/posts/Greater Melbourne Distribution Center Landscape/analysis.html#distribution-center-locations",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "Distribution Center Locations",
+    "text": "Distribution Center Locations\nDistribution centers are typically located in areas with high population density and good access to transportation networks. The following map shows the locations of distribution centers in the Greater Melbourne area."
+  },
+  {
+    "objectID": "projects/posts/Greater Melbourne Distribution Center Landscape/index.html#population-density",
+    "href": "projects/posts/Greater Melbourne Distribution Center Landscape/index.html#population-density",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "Population Density",
+    "text": "Population Density\nPopulation density is a key factor in determining the location of distribution centers."
+  },
+  {
+    "objectID": "projects/posts/Greater Melbourne Distribution Center Landscape/index.html#distribution-center-locations",
+    "href": "projects/posts/Greater Melbourne Distribution Center Landscape/index.html#distribution-center-locations",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "Distribution Center Locations",
+    "text": "Distribution Center Locations\nDistribution centers are typically located in areas with high population density and good access to transportation networks. The following map shows the locations of distribution centers in the Greater Melbourne area."
+  },
+  {
+    "objectID": "projects/posts/Greater Melbourne Distribution Center Landscape/index.html#findings",
+    "href": "projects/posts/Greater Melbourne Distribution Center Landscape/index.html#findings",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "Findings",
+    "text": "Findings\n\nMore inhouse Fullfillment Centers as businesses are moving towards securing their own supply chains to deal with disruptions and uncertainties.\nThe warehouse zone is get crowded with more and more distribution centers. In the near future, unoccupied land across the Sunburry line will become hotspot for new warehouses thanks to its accessibility to the metropolitan zone."
+  },
+  {
+    "objectID": "projects/posts/Greater Melbourne Distribution Center Landscape/sections/analysis.html",
+    "href": "projects/posts/Greater Melbourne Distribution Center Landscape/sections/analysis.html",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "",
+    "text": "This project aims to analyze the distribution center landscape in the Greater Melbourne area and point out changes in the landscape post-COVID-19. The analysis will focus on the following aspects:\n\nDistribution center locations\nDistribution center sizes"
+  },
+  {
+    "objectID": "projects/posts/Greater Melbourne Distribution Center Landscape/sections/analysis.html#background",
+    "href": "projects/posts/Greater Melbourne Distribution Center Landscape/sections/analysis.html#background",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "",
+    "text": "This project aims to analyze the distribution center landscape in the Greater Melbourne area and point out changes in the landscape post-COVID-19. The analysis will focus on the following aspects:\n\nDistribution center locations\nDistribution center sizes"
+  },
+  {
+    "objectID": "projects/posts/Greater Melbourne Distribution Center Landscape/sections/analysis.html#population-density",
+    "href": "projects/posts/Greater Melbourne Distribution Center Landscape/sections/analysis.html#population-density",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "Population Density",
+    "text": "Population Density\nPopulation density is a key factor in determining the location of distribution centers."
+  },
+  {
+    "objectID": "projects/posts/Greater Melbourne Distribution Center Landscape/sections/analysis.html#distribution-center-locations",
+    "href": "projects/posts/Greater Melbourne Distribution Center Landscape/sections/analysis.html#distribution-center-locations",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "Distribution Center Locations",
+    "text": "Distribution Center Locations\nDistribution centers are typically located in areas with high population density and good access to transportation networks. The following map shows the locations of distribution centers in the Greater Melbourne area."
+  },
+  {
+    "objectID": "projects/posts/Greater Melbourne Distribution Center Landscape/sections/analysis.html#findings",
+    "href": "projects/posts/Greater Melbourne Distribution Center Landscape/sections/analysis.html#findings",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "Findings",
+    "text": "Findings\n\nMore inhouse Fullfillment Centers as businesses are moving towards securing their own supply chains to deal with disruptions and uncertainties.\nThe warehouse zone is get crowded with more and more distribution centers. In the near future, unoccupied land across the Sunburry line will become hotspot for new warehouses thanks to its accessibility to the metropolitan zone."
+  },
+  {
+    "objectID": "projects/posts/fullfillmentCenter.html",
+    "href": "projects/posts/fullfillmentCenter.html",
+    "title": "Fullfillment Centers in Greater Melbourne",
+    "section": "",
+    "text": "My mentor, with 40 years in U.S. warehousing, once said, “The industry used to be simple—everything was routine—and universal: whether in Vietnam or the U.S., it was always ‘safety first, everything else follows.’ That is, until e-commerce became a thing.”\nThe Covid-19 pandemic further nurtured online shopping habits, made uncertainty the norm, and accelerated the adoption of automation and robotics to take over human roles inside the warehouse.\nAs someone with warehousing experience in Vietnam, new to Melbourne post-Covid, and hooked on online shopping, this project is my attempt to explore the Australian warehousing industry and understand how the pandemic has reshaped it.",
+    "crumbs": [
+      "Report",
+      "1. Project Overview"
+    ]
+  },
+  {
+    "objectID": "projects/posts/fullfillmentCenter.html#preface",
+    "href": "projects/posts/fullfillmentCenter.html#preface",
+    "title": "Fullfillment Centers in Greater Melbourne",
+    "section": "",
+    "text": "My mentor, with 40 years in U.S. warehousing, once said, “The industry used to be simple—everything was routine—and universal: whether in Vietnam or the U.S., it was always ‘safety first, everything else follows.’ That is, until e-commerce became a thing.”\nThe Covid-19 pandemic further nurtured online shopping habits, made uncertainty the norm, and accelerated the adoption of automation and robotics to take over human roles inside the warehouse.\nAs someone with warehousing experience in Vietnam, new to Melbourne post-Covid, and hooked on online shopping, this project is my attempt to explore the Australian warehousing industry and understand how the pandemic has reshaped it.",
+    "crumbs": [
+      "Report",
+      "1. Project Overview"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/index.html",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/index.html",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "",
+    "text": "This project aims to analyze the distribution center landscape in the Greater Melbourne area and point out changes in the landscape post-COVID-19. The analysis will focus on the following aspects:\n\nDistribution center locations\nDistribution center sizes",
+    "crumbs": [
+      "Home",
+      "Greater Melbourne Distribution Center Landscape"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/index.html#background",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/index.html#background",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "",
+    "text": "This project aims to analyze the distribution center landscape in the Greater Melbourne area and point out changes in the landscape post-COVID-19. The analysis will focus on the following aspects:\n\nDistribution center locations\nDistribution center sizes",
+    "crumbs": [
+      "Home",
+      "Greater Melbourne Distribution Center Landscape"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/index.html#population-density",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/index.html#population-density",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "Population Density",
+    "text": "Population Density\nPopulation density is a key factor in determining the location of distribution centers.",
+    "crumbs": [
+      "Home",
+      "Greater Melbourne Distribution Center Landscape"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/index.html#distribution-center-locations",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/index.html#distribution-center-locations",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "Distribution Center Locations",
+    "text": "Distribution Center Locations\nDistribution centers are typically located in areas with high population density and good access to transportation networks. The following map shows the locations of distribution centers in the Greater Melbourne area.",
+    "crumbs": [
+      "Home",
+      "Greater Melbourne Distribution Center Landscape"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/index.html#findings",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/index.html#findings",
+    "title": "Greater Melbourne Distribution Center Landscape",
+    "section": "Findings",
+    "text": "Findings\n\nMore inhouse Fullfillment Centers as businesses are moving towards securing their own supply chains to deal with disruptions and uncertainties.\nThe warehouse zone is get crowded with more and more distribution centers. In the near future, unoccupied land across the Sunburry line will become hotspot for new warehouses thanks to its accessibility to the metropolitan zone.",
+    "crumbs": [
+      "Home",
+      "Greater Melbourne Distribution Center Landscape"
+    ]
+  },
+  {
+    "objectID": "blog/posts/2025-05-13 ASGS/index.html",
+    "href": "blog/posts/2025-05-13 ASGS/index.html",
+    "title": "The Main Structure of Australian Statistical Geography Standard (ASGS) Third Edition",
+    "section": "",
+    "text": "The Main Structure of Australian Statistical Geography Standard (ASGS) \\({3}^{th}\\) Edition has 7 levels, and is developed based on the concept of a functional area - an area within which many people commute or travel to access services.\n\n\n\n\n\n\n\n\n\nGeographic Level\nPopulation Range\nComposition\nPrimary Use\n\n\n\n\nMesh Block (MB)\n30–60 dwellings\nSmallest classification with 368,286 units\nFoundation for all ASGS levels\n\n\nStatistical Area Level 1 (SA1)\n200–800 people\nBuilt from 61,845 Mesh Blocks\nDetailed Census dissemination\n\n\nStatistical Area Level 2 (SA2)\n3,000–25,000 people\nBuilt from 2,475 SA1s\nCommunity health & service stats\n\n\nStatistical Area Level 3 (SA3)\n30,000–130,000 people\nBuilt from 359 SA2s\nRegional planning and comparison\n\n\nStatistical Area Level 4 (SA4)\n100,000–500,000 people\nBuilt from 108 SA3s\nLabour force reporting\n\n\nState/Territory\nVaries widely\nBuilt from 9 SA4s + 1 Other Territory (OT)\nNational-level statistics and governance\n\n\nAustralia\n\nBuilt from 8 States/Territories + 1 Other Territory (OT)\n\n\n\n\nSource: ABS ASGS Edition 3"
+  },
+  {
+    "objectID": "blog/posts/2025-05-13 ASGS/index.html#summary-of-the-main-structure-of-asgs",
+    "href": "blog/posts/2025-05-13 ASGS/index.html#summary-of-the-main-structure-of-asgs",
+    "title": "The Main Structure of Australian Statistical Geography Standard (ASGS) Edition 3",
+    "section": "",
+    "text": "Main Structure of the Australian Statistical Geography Standard (ASGS) \\({3}^{th}\\) Edition has 7 levels, and is developed based on the concept of a functional area - an area within which many people commute or travel to access services.\n\n\n\n\n\n\n\n\n\nGeographic Level\nPopulation Range\nComposition\nPrimary Use\n\n\n\n\nMesh Block (MB)\n30–60 dwellings\nSmallest classification with 368,286 units\nFoundation for all ASGS levels\n\n\nStatistical Area Level 1 (SA1)\n200–800 people\nBuilt from 61,845 Mesh Blocks\nDetailed Census dissemination\n\n\nStatistical Area Level 2 (SA2)\n3,000–25,000 people\nBuilt from 2,475 SA1s\nCommunity health & service stats\n\n\nStatistical Area Level 3 (SA3)\n30,000–130,000 people\nBuilt from 359 SA2s\nRegional planning and comparison\n\n\nStatistical Area Level 4 (SA4)\n100,000–500,000 people\nBuilt from 108 SA3s\nLabour force reporting\n\n\nState/Territory\nVaries widely\nBuilt from 9 SA4s + 1 Other Territory (OT)\nNational-level statistics and governance\n\n\nAustralia\n\nBuilt from 8 States/Territories + 1 Other Territory (OT)\n\n\n\n\nSource: ABS ASGS Edition 3"
+  },
+  {
+    "objectID": "blog/posts/2025-05-13 ASGS/index.html#interactive-map",
+    "href": "blog/posts/2025-05-13 ASGS/index.html#interactive-map",
+    "title": "The Main Structure of Australian Statistical Geography Standard (ASGS) Third Edition",
+    "section": "Interactive Map",
+    "text": "Interactive Map\nBelow interactive map gives examples of how higher level aggregations are built from lower level ones.\nWhile Greater Capital City Statistical Areas (GCCSA) are not a part of the ASGS, they are built from SA4s, and are used to provide a more detailed understanding of the population distribution and characteristics within major urban areas of State and Territory.\n\nOverviewMesh BlockSA1SA2SA3SA4GCCSAState/Territory\n\n\n\n\n\n\n\nAn overview of the Main Structure (may take a few seconds to load.\n). Filter map layers and Adjust zoom in/out options for better understanding\n\n\n\n\n\n\n\n\nMesh Block agregations of North Melbourne - an SA2 block\n\n\n\n\n\n\n\n\nSA1 agregations of North Melbourne - an SA2 block\n\n\n\n\n\n\n\n\nSA2 agregrations of Melbourne City - an SA3 block\n\n\n\n\n\n\n\n\nSA3 agregrations of Melbourne-Inner - an SA4 block\n\n\n\n\n\n\n\n\nSA4 agregrations of Greater Melbourne - an SA5 block\n\n\n\n\n\n\n\n\nGCCSA aggregations of Victoria (State) involve Greater Melbourne and Rest of Victoria.\n\n\n\n\n\n\n\n\nAustralia involve 8 States and 1 Other Territory (OT)."
+  },
+  {
+    "objectID": "blog/posts/2025-05-13 ASGS/index.html#overview",
+    "href": "blog/posts/2025-05-13 ASGS/index.html#overview",
+    "title": "The Main Structure of Australian Statistical Geography Standard (ASGS) Third Edition",
+    "section": "",
+    "text": "The Main Structure of Australian Statistical Geography Standard (ASGS) \\({3}^{th}\\) Edition has 7 levels, and is developed based on the concept of a functional area - an area within which many people commute or travel to access services.\n\n\n\n\n\n\n\n\n\nGeographic Level\nPopulation Range\nComposition\nPrimary Use\n\n\n\n\nMesh Block (MB)\n30–60 dwellings\nSmallest classification with 368,286 units\nFoundation for all ASGS levels\n\n\nStatistical Area Level 1 (SA1)\n200–800 people\nBuilt from 61,845 Mesh Blocks\nDetailed Census dissemination\n\n\nStatistical Area Level 2 (SA2)\n3,000–25,000 people\nBuilt from 2,475 SA1s\nCommunity health & service stats\n\n\nStatistical Area Level 3 (SA3)\n30,000–130,000 people\nBuilt from 359 SA2s\nRegional planning and comparison\n\n\nStatistical Area Level 4 (SA4)\n100,000–500,000 people\nBuilt from 108 SA3s\nLabour force reporting\n\n\nState/Territory\nVaries widely\nBuilt from 9 SA4s + 1 Other Territory (OT)\nNational-level statistics and governance\n\n\nAustralia\n\nBuilt from 8 States/Territories + 1 Other Territory (OT)\n\n\n\n\nSource: ABS ASGS Edition 3"
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/analysis.html",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/analysis.html",
+    "title": "Findings and Analysis",
+    "section": "",
+    "text": "Terminology alert!!!\n\n\n\n\n\n\n\nFulfillment centers are specialised warehouses that store finished products and prepare, pack, and ship customer orders - typically for e-commerce - either directly to consumers or to retail stores.\n\n\n\n\nStrategic location: Often near transport hubs and densely populated areas to ensure fast, efficient delivery to end customers.\nHigh scalability: Designed to handle large, fluctuating volumes of small-parcel, multi-item orders shipped to geographically dispersed destinations. Advanced technology and automation are often required to maintain speed and accuracy.\n\n\n\n\n\n3PL (Third-Party Logistics):\nOperated by logistics providers, offering warehousing and order fulfillment services to multiple companies — ideal for small e-commerce businesses without in-house logistics capabilities.\nIn-House:\nManaged by the product-selling company itself, typically used by large retailers or brands with high order volumes and their own delivery team for better control over operations.",
+    "crumbs": [
+      "Home",
+      "Report",
+      "2. Analysis"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/analysis.html#background",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/analysis.html#background",
+    "title": "Findings and Analysis",
+    "section": "",
+    "text": "Terminology and Definitions\n\n\n\n\n\n\n\nFulfillment centers are specialized warehouses that store finished products and handle picking, packing, and shipping—either to retail stores or directly to customers.\n\n\n\n\nStrategic location: Often near transport hubs and densely populated areas to ensure fast, efficient delivery to end customers.\nHigh scalability: Designed to handle large, fluctuating volumes of small-parcel, multi-item orders shipped to geographically dispersed destinations. Advanced technology and automation are often required to maintain speed and accuracy.\n\n\n\n\n\n3PL (Third-Party Logistics):\nOperated by logistics providers, offering warehousing and order fulfillment services to multiple companies — ideal for small e-commerce businesses without in-house logistics capabilities.\nIn-House:\nManaged by the product-selling company itself, typically used by large retailers or brands with high order volumes and their own delivery team for greater control over operations.",
+    "crumbs": [
+      "Home",
+      "Findings and Analysis"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/analysis.html#findings",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/analysis.html#findings",
+    "title": "Findings and Analysis",
+    "section": "Findings",
+    "text": "Findings\n\n\nNote: Information on fulfillment centers in Greater Melbourne was collected through manual searches on Google Maps, company website visits, news articles, and LinkedIn posts. The data is not exhaustive and may not represent the complete landscape of fulfillment centers in the region.",
+    "crumbs": [
+      "Home",
+      "Report",
+      "2. Analysis"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/analysis.html#analysis",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/analysis.html#analysis",
+    "title": "Findings and Analysis",
+    "section": "Analysis",
+    "text": "Analysis\n\nAs the pandemic exposed the risks of outsourcing, more in-house fulfillment centers are being built. Major supermarket chains such as Coles, Woolworths, and MetCash-IGA only began developing their own distribution centers after COVID-19. Coles, for instance, relied on Linfox as its 3PL provider in 2018 but is now constructing its first in-house, fully automated facility in Melbourne. Among established names, only Aldi had its own center as early as 2010—its market-leading position highlights the benefits of taking full control over the supply chain.\nDespite the e-commerce boom, the 3PL market remains heavily dominated by Amazon, which continues to expand with mega fulfillment centers.\nFully automated fulfillment centers are becoming the norm, with new warehouses built by large, well-capitalized players like Amazon and Coles. These technologies are often out of reach for smaller operators, raising market barriers for new entrants.\nAltona, Laverton North, and Truganina remain key warehousing hubs, supported by prime location and ample land reserves for ongoing industrial development.",
+    "crumbs": [
+      "Home",
+      "Report",
+      "2. Analysis"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/warehouseLocations.html",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/warehouseLocations.html",
+    "title": "Tra Tran",
+    "section": "",
+    "text": "warehouse location, if you have the correct address, use this function to get the coordinates\n\nimport requests\n# headers={'User-Agent': 'Your App Name'}\ndef geocode(address):\n    url = \"https://nominatim.openstreetmap.org/search\"\n    params = {\n        'q': address,\n        'format': 'json'\n    }\n    response = requests.get(url, params=params, headers={'User-Agent': 'Your App Name'})\n    if response.status_code == 200:\n        data = response.json()\n        if data:\n            return data[0]['lat'], data[0]['lon']\n    return None, None\n\n\ncode = geocode(\"Melbourne, Australia\")\nprint(code)\n\n('-37.8142454', '144.9631732')",
+    "crumbs": [
+      "Home",
+      "How I built this",
+      "2. Warehouse Locations Leaflet Map"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html",
+    "title": "Tra Tran",
+    "section": "",
+    "text": "format: html: toc: true toc-depth: 3 grid: margin-width: 200px\ncitation-location: margin reference-location: margin",
+    "crumbs": [
+      "Home",
+      "How I built this",
+      "1. Population Density Dot Plot"
+    ]
+  },
+  {
+    "objectID": "projects/posts/fullfillmentCenter.html#terminology",
+    "href": "projects/posts/fullfillmentCenter.html#terminology",
+    "title": "Fullfillment Centers in Greater Melbourne",
+    "section": "Terminology",
+    "text": "Terminology\n\n1. Fulfillment Center\nFulfillment centers are specialised warehouses that store finished products and prepare, pack, and ship customer orders - typically for e-commerce - either directly to consumers or to retail stores.\n\n\n2. Key Characteristics of Fulfillment Centers\n\nStrategic location: Often near transport hubs and densely populated areas to ensure fast, efficient delivery to end customers.\nHigh scalability: Designed to handle large, fluctuating volumes of small-parcel, multi-item orders shipped to geographically dispersed destinations. Advanced technology and automation are often required to maintain speed and accuracy.\n\n\n\n3. Two Main Types of Fulfillment Centers\n\n3PL (Third-Party Logistics):\nOperated by logistics providers, offering warehousing and order fulfillment services to multiple companies — ideal for small e-commerce businesses without in-house logistics capabilities.\nIn-House:\nManaged by the product-selling company itself, typically used by large retailers or brands with high order volumes and their own delivery team for better control over operations.",
+    "crumbs": [
+      "Report",
+      "1. Project Overview"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html#background",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html#background",
+    "title": "Population Density Dots",
+    "section": "",
+    "text": "While population data on Statistical Area Level 2 is commonly used for studying service delivery, fulfillment centers operate closer to the final stage of the logistics chain — delivering parcels to individual households. Because of this, population density at a finer scale (SA1 or Mesh Block) is more appropriate for identifying areas of concentrated demand.\n\n\n\n\n\n\nBefore we start!!!\n\n\n\n\n\nLet’s skim through this blog post to understand the seven levels of Australian Statistical Geography Standard (ASGS).\n\n\n\n\n1SA1_count_shapefile |&gt;\n  mutate(n_dots = floor(Person / 100))  |&gt;     \n2  filter(n_dots &gt; 0) |&gt;  st_sample(size =SA1_count_shapefile$n_dots) |&gt;\n3  st_sf() -&gt; points_sf\n\n\n1\n\nSA1_count_shapefile includes population counts and geometries for each SA1 block in Victoria.\n\n2\n\nn_dots is number of population dots in each SA1 polygon with each dot representing 100 people, calculated using floor(Person / 100). 100persons/dot is the chosen resolution, as most SA1 blocks have 200–800 people, resulting in 2–8 dots per block. Using floor() ensures we only create whole dots and do not overcount the population.\n\n3\n\nPopulation density dots are generated by sampling points within each SA1 polygon using the st_sample() function from sf package (see the function reference). To reduce computation time, we first remove SA1 blocks with zero population using filter(n_dots &gt; 0), since there’s no need to generate dots for empty areas.\n\n\n\n\n\n\nCode\nSA1_count_shapefile |&gt;\n  mutate(n_dots = floor(Person / 100))  |&gt; \n  filter(n_dots &gt; 0)\n\n\nSimple feature collection with 14987 features and 3 fields (with 1 geometry empty)\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: 140.9619 ymin: -38.90962 xmax: 149.9762 ymax: -33.98064\nGeodetic CRS:  GCS_GDA2020\n# A tibble: 14,987 × 4\n   SA1_COD     Person                                            geometry n_dots\n * &lt;chr&gt;        &lt;dbl&gt;                                  &lt;MULTIPOLYGON [°]&gt;  &lt;dbl&gt;\n 1 20101100101    437 (((143.8009 -37.55382, 143.8004 -37.55376, 143.800…      4\n 2 20101100102    183 (((143.7977 -37.55071, 143.7978 -37.55075, 143.798…      1\n 3 20101100105    382 (((143.8156 -37.5587, 143.8169 -37.55885, 143.8175…      3\n 4 20101100106    584 (((143.801 -37.55383, 143.8024 -37.55399, 143.8032…      5\n 5 20101100107    363 (((143.8129 -37.55643, 143.813 -37.5561, 143.8132 …      3\n 6 20101100108    792 (((143.8089 -37.55476, 143.809 -37.55478, 143.8102…      7\n 7 20101100109    528 (((143.8044 -37.55316, 143.8046 -37.55213, 143.804…      5\n 8 20101100110    512 (((143.7886 -37.54654, 143.7882 -37.54637, 143.786…      5\n 9 20101100111    371 (((143.7923 -37.54826, 143.7922 -37.54849, 143.792…      3\n10 20101100112    424 (((143.7918 -37.5514, 143.7917 -37.55106, 143.7916…      4\n# ℹ 14,977 more rows\n\n\n\n… while its output should look like this:\n\n\n\nCode\npoints_sf\n\n\nSimple feature collection with 57470 features and 1 field\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: 141.0321 ymin: -38.87474 xmax: 149.7605 ymax: -34.12203\nGeodetic CRS:  GCS_GDA2020\n# A tibble: 57,470 × 2\n     FID             geometry\n   &lt;dbl&gt;          &lt;POINT [°]&gt;\n 1     0  (143.802 -37.55391)\n 2     1  (143.804 -37.55111)\n 3     2 (143.8023 -37.54956)\n 4     3 (143.8039 -37.55215)\n 5     4 (143.7962 -37.55324)\n 6     5 (143.8123 -37.56792)\n 7     6 (143.8129 -37.56038)\n 8     7 (143.8142 -37.56515)\n 9     8 (143.8009 -37.55428)\n10     9 (143.7993 -37.55614)\n# ℹ 57,460 more rows\n\n\n\n… and demo on plotting the dots using ggplot2:\n\n\n\nCode\nggplot() +\n  geom_sf(data = SA1_count_shapefile, fill = \"grey95\", color = \"white\", size = 0.1) +\n  geom_sf(data = points_sf, color = \"orange\", size = 0.3, alpha = 0.7) +\n  theme_minimal() +\n  labs(\n    title = \"Population Density in Victoria\",\n    subtitle = \"Each dot represents ~100 people\",\n    caption = \"Source: ABS Census Data\",\n    fill = \"Population\"\n  ) +\n  theme(\n    legend.position = \"none\",\n    plot.title = element_text(size = 16, face = \"bold\", hjust = 0.5),\n    plot.subtitle = element_text(size = 12, hjust = 0.5),\n    plot.caption = element_text(size = 8, hjust = 1)\n  )",
+    "crumbs": [
+      "Home",
+      "2. How I built this",
+      "2.1 Population Density"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html#footnotes",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html#footnotes",
+    "title": "Tra Tran",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\n\n\n\nPopulation density, Victoria 2016. Department of Environment, Land, Water and Planning (2020).\n\n\n↩︎\n\n\n\n4 types of JOIN. Trust-me-bro (n.d.).\n\n\n↩︎",
+    "crumbs": [
+      "Home",
+      "How I built this",
+      "2. Population Density Dot Plot"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html#note",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html#note",
+    "title": "Population Density Dots",
+    "section": "Note",
+    "text": "Note",
+    "crumbs": [
+      "Home",
+      "2. How I built this",
+      "2.1 Population Density"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html#motivation",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html#motivation",
+    "title": "Tra Tran",
+    "section": "Motivation",
+    "text": "Motivation\n\n\n\n\n\n\nBefore we start!!!\n\n\n\n\n\nLet’s skim through this blog post to understand hierarchical structure of Australian Statistical Geography Standard (ASGS) 3th Edition.\n\n\n\nSA2-level population data is commonly used in urban planning to determine warehouse locations. However, fulfillment centers operate at the last-mile stage of the logistics chain, delivering directly to households and retail stores. Therefore, using finer-scale population data — at the SA1 or Mesh Block level — is more appropriate to determine their locations.\nThe yellow population dots in my report were built on SA1 level.",
+    "crumbs": [
+      "Home",
+      "How I built this",
+      "2. Population Density Dot Plot"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html#inspiration",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html#inspiration",
+    "title": "Tra Tran",
+    "section": "Inspiration",
+    "text": "Inspiration\nMy inspiration comes from the map1 featured in Population and Housing in Regional Victoria 2020 Report. As far as I know, the original was created using ArcGIS - not open-source.\nWith some familiarity in R, dplyr, and sf packages — you can recreate similar dot-density plots at different statistical geography levels and resolutions, completely free of charge.",
+    "crumbs": [
+      "Home",
+      "How I built this",
+      "2. Population Density Dot Plot"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html#execution",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html#execution",
+    "title": "Tra Tran",
+    "section": "Execution",
+    "text": "Execution\n\n\n\n\n\n\nResources (to work with spatial vector data in R)\n\n\n\n\n\nYou need R, RStudio, and some packages to get started. If you are completely new, I recommend resources from RLadies Sydney (BasicBasics and CleanItUp units are must-read).\nIn R, Working with tabular data using dplyr package is straightforward, |&gt;or%&gt;% pipe operators and these functions: mutate, select, filter and group_by along with 4 types of join should get you far.\nThe most popular package to work with spatial data in R is sf. An sf object extends regular tabular data frames to include a geometry column, which contains the spatial information. Thus, a simple explanation on how to read shapefiles with sf should be enough to get you started. Then, those mentioned dplyr functions will come in handy.\n\n\n\n\n1. Preparing data\nThis stage involves:\n\nRetrieving population data from the Australian Bureau of Statistics (ABS): ABS provides population counts at the smallest level - Mesh Block, along with allocation file for mapping among levels, and shapefiles for each level. By joining these files2, a shapefile with population counts of any level can be created.\nChoosing a resolution for the population dots (e.g., 1 dot = 100 people)\n\n\n1SA1_count_shapefile |&gt;\n2  dplyr::mutate(n_dots = floor(Person / 100))  |&gt;\n3  dplyr::filter(n_dots &gt; 0) -&gt; SA_count_shapefile\n\n\n1\n\nSA1_count_shapefile includes population counts Person, and polygon Geometry for each SA1 block (see below).\n\n2\n\nn_dots is the number of population dots to generate per SA1 polygon, calculated as floor(Person / 100). This resolution (1 dot = 100 people) is chosen because most SA1s have between 200 and 800 people, resulting in 2 to 8 dots per block. Using floor() ensures we only generate whole dots and prevents overcounting.\n\n3\n\nOptionally, to reduce computation time, filter(n_dots &gt; 0) is to skip blocks with zero population.\n\n\n\n\nOutput of this stage should be an sf object with polygons and number of dots for each polygon.\n\nSA1_count_shapefile\n\nSimple feature collection with 14987 features and 3 fields (with 1 geometry empty)\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: 140.9619 ymin: -38.90962 xmax: 149.9762 ymax: -33.98064\nGeodetic CRS:  GCS_GDA2020\n# A tibble: 14,987 × 4\n   SA1_COD     Person n_dots                                            geometry\n   &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;                                  &lt;MULTIPOLYGON [°]&gt;\n 1 20101100101    437      4 (((143.8009 -37.55382, 143.8004 -37.55376, 143.800…\n 2 20101100102    183      1 (((143.7977 -37.55071, 143.7978 -37.55075, 143.798…\n 3 20101100105    382      3 (((143.8156 -37.5587, 143.8169 -37.55885, 143.8175…\n 4 20101100106    584      5 (((143.801 -37.55383, 143.8024 -37.55399, 143.8032…\n 5 20101100107    363      3 (((143.8129 -37.55643, 143.813 -37.5561, 143.8132 …\n 6 20101100108    792      7 (((143.8089 -37.55476, 143.809 -37.55478, 143.8102…\n 7 20101100109    528      5 (((143.8044 -37.55316, 143.8046 -37.55213, 143.804…\n 8 20101100110    512      5 (((143.7886 -37.54654, 143.7882 -37.54637, 143.786…\n 9 20101100111    371      3 (((143.7923 -37.54826, 143.7922 -37.54849, 143.792…\n10 20101100112    424      4 (((143.7918 -37.5514, 143.7917 -37.55106, 143.7916…\n# ℹ 14,977 more rows\n\n\n\n\n2. Generating population dots\nGenerating population dots is the process to ramdomly sampling points within each polygon with st_sample() from sf package.\n\n1sf::st_sample(SA1_count_shapefile, size = SA1_count_shapefile$n_dots)|&gt;\n2  sf::st_sf() -&gt; points_sf\n\n\n1\n\nst_sample takes in an sf object with multipolygon geometry, size argument specifies the number of points to sample from each polygon.\n\n2\n\nResult is converted from a list of points to an sf object with st_sf().\n\n\n\n\nResult should have geometry column representing point locations.\n\npoints_sf\n\nSimple feature collection with 57470 features and 1 field\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: 141.0321 ymin: -38.87474 xmax: 149.7605 ymax: -34.12203\nGeodetic CRS:  GCS_GDA2020\n# A tibble: 57,470 × 2\n     FID             geometry\n   &lt;dbl&gt;          &lt;POINT [°]&gt;\n 1     0  (143.802 -37.55391)\n 2     1  (143.804 -37.55111)\n 3     2 (143.8023 -37.54956)\n 4     3 (143.8039 -37.55215)\n 5     4 (143.7962 -37.55324)\n 6     5 (143.8123 -37.56792)\n 7     6 (143.8129 -37.56038)\n 8     7 (143.8142 -37.56515)\n 9     8 (143.8009 -37.55428)\n10     9 (143.7993 -37.55614)\n# ℹ 57,460 more rows\n\n\n\n\n3. Recreating the plot\nMy data processing stage results in SA1_count_shapefile and the sampling density dots process results in points_sf\nBelow is the code to recreate the plot at the beginning of this post\n\nlibrary(ggplot2)\nlibrary(ggtext)  \n\nggplot() +\n  geom_sf(data = SA1_count_shapefile, fill = \"grey95\", color = \"white\", size = 0.1) +\n  geom_sf(data = points_sf, color = \"orange\", size = 0.3, alpha = 0.7) +\n  theme_minimal() +\n  labs(\n    title = \"Population Density in Victoria\",\n    subtitle = \"Each &lt;span style='color:orange'&gt;&#9679;&lt;/span&gt; = 100 people\",\n    caption = \"Source: ABS Census Data 2021\"\n  ) +\n  theme(\n    legend.position = \"none\",\n    plot.title = element_text(size = 16, face = \"bold\", hjust = 0.5),\n    plot.subtitle = element_markdown(size = 12, hjust = 0.5),\n    plot.caption = element_text(size = 9, hjust = 1)\n  )",
+    "crumbs": [
+      "Home",
+      "How I built this",
+      "2. Population Density Dot Plot"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html#population-dot-sampling-method",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/populationDensity.html#population-dot-sampling-method",
+    "title": "Tra Tran",
+    "section": "Population Dot Sampling Method",
+    "text": "Population Dot Sampling Method\n\nSA1_count_shapefile includes both population counts and geometries for each SA1 block in Victoria.\nn_dots is the number of population dots to generate per SA1 polygon, calculated as floor(Person / 100). This resolution (1 dot = 100 people) is chosen because most SA1s have between 200 and 800 people, resulting in 2 to 8 dots per block. Using floor() ensures we only generate whole dots and prevents overcounting. To reduce computation time, we optionally apply filter(n_dots &gt; 0) to skip blocks with zero population.\nThe population dots are created using the st_sample() function from the sf package, which randomly samples points within each polygon. The result is an sf object with one row per dot, and a geometry column containing the coordinates of each sampled point.\n\n\n\nSimple feature collection with 57470 features and 1 field\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: 141.0321 ymin: -38.87474 xmax: 149.7605 ymax: -34.12203\nGeodetic CRS:  GCS_GDA2020\n# A tibble: 57,470 × 2\n     FID             geometry\n   &lt;dbl&gt;          &lt;POINT [°]&gt;\n 1     0  (143.802 -37.55391)\n 2     1  (143.804 -37.55111)\n 3     2 (143.8023 -37.54956)\n 4     3 (143.8039 -37.55215)\n 5     4 (143.7962 -37.55324)\n 6     5 (143.8123 -37.56792)\n 7     6 (143.8129 -37.56038)\n 8     7 (143.8142 -37.56515)\n 9     8 (143.8009 -37.55428)\n10     9 (143.7993 -37.55614)\n# ℹ 57,460 more rows\n\n\n\n3. Recreate the plot\nMy data processing stage results in SA1_count_shapefile and the sampling density dots process results in points_sf\nThis is the code to recreate the plot at the beginning of this post with ggplot2\n\nrequire(ggplot2)\nrequire(sf)\n\nggplot() +\n  geom_sf(data = SA1_count_shapefile, fill = \"grey95\", color = \"white\", size = 0.1) +\n  geom_sf(data = points_sf, color = \"orange\", size = 0.3, alpha = 0.7) +\n  theme_minimal() +\n  labs(\n    title = \"Population Density in Victoria\",\n    subtitle = \"Each dot represents ~100 people\",\n    caption = \"Source: ABS Census Data\",\n    fill = \"Population\"\n  ) +\n  theme(\n    legend.position = \"none\",\n    plot.title = element_text(size = 16, face = \"bold\", hjust = 0.5),\n    plot.subtitle = element_text(size = 12, hjust = 0.5),\n    plot.caption = element_text(size = 8, hjust = 1)\n  )",
+    "crumbs": [
+      "Home",
+      "How I built this",
+      "1. Population Density Dot Plot"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/warehouseLocations.html#motivation",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/warehouseLocations.html#motivation",
+    "title": "Tra Tran",
+    "section": "Motivation",
+    "text": "Motivation\nTo build maps in R, the two most popular packages are mapview and leaflet. For this report, I chose leaflet due to its flexibility and customizability.\nHere’s the reasoning behind my choice and map design:\n\nTo show transportation hubs and major roads → Map tiles\nTo display warehouse locations with details → Markers with popups\nTo distinguish warehouse sizes → Marker size\nTo indicate warehouse type (3PL vs. in-house) → Marker color\nTo compare pre- and post-COVID landscapes → Two separate layers: before and after\nTo provide population context → Sub-layer of population density dots (since this is not the main focus)",
+    "crumbs": [
+      "Home",
+      "How I built this",
+      "1. Warehouse Locations Leaflet Map"
+    ]
+  },
+  {
+    "objectID": "projects/Greater Melbourne Distribution Center Landscape/warehouseLocations.html#execution",
+    "href": "projects/Greater Melbourne Distribution Center Landscape/warehouseLocations.html#execution",
+    "title": "Tra Tran",
+    "section": "Execution",
+    "text": "Execution\n\n1. Preparing data\n\nFullfillment Centers data\nData on fulfillment centers in Greater Melbourne was collected through manual searches on Google Maps, company website visits, news articles, and LinkedIn posts for 8 piece of information:\n\nName;\nAddress;\nSince (the year the warehouse was established).\nType (in-house or 3PL);\nArea (size of the warehouse, categorized as Small, Medium, Large);\nNote (any additional information about the warehouse).\nlat: (latitude coordinate of address);\nlon (longitude coordinate of address);\n\nlon and lat were obtained using the geocode function which retrieves latitude and longitude based on the address. Data is then turned into a sf object using sf::st_as_sf(coords = c(\"lon\", \"lat\")\n\n\nCode\nimport requests\n\ndef geocode(address):\n    url = \"https://nominatim.openstreetmap.org/search\"\n    params = {\n        'q': address,\n        'format': 'json'\n    }\n    response = requests.get(url, params=params, headers={'User-Agent': 'Your App Name'})\n    if response.status_code == 200:\n        data = response.json()\n        if data:\n            return data[0]['lat'], data[0]['lon']\n    return None, None\n\n\nData is available for download from fullfillmentCenter_sf.zip\n\nfullfillmentCenter_sf\n\nSimple feature collection with 28 features and 6 fields\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: 144.729 ymin: -38.05242 xmax: 145.2347 ymax: -37.578\nGeodetic CRS:  GCS_GDA2020\n# A tibble: 28 × 7\n   Name                Address Type  Since Area  Note              geometry\n   &lt;chr&gt;               &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;          &lt;POINT [°]&gt;\n 1 Officeworks Distri… 75 Hor… inho…  2023 Large Tota… (144.8108 -37.84454)\n 2 GPC Melbourne Dist… 24 Wil… inho…  2023 Large Tota…  (144.948 -37.67748)\n 3 Aldi - Distributio… 60 Swa… inho…  2010 Mega  Tota… (144.7756 -37.80179)\n 4 Myer National Dist… 73 Mom… inho…  2023 Large Tota…  (144.729 -37.76164)\n 5 Somerton Distribut… 20-50 … 3PL    2010 Mega  7134… (144.9574 -37.64112)\n 6 Kmart Distribution… 2-12 B… inho…  2018 Mega  Tota… (144.7609 -37.84188)\n 7 Coles Distribution… 484 Do… inho…  2024 Mega  Cole… (144.7338 -37.82371)\n 8 Target Distributio… 15 Nat… inho…  2017 Mega  Targ… (144.7589 -37.83151)\n 9 John Deere Limited… 1 John… inho…  2020 Large Tota… (144.8059 -37.81015)\n10 JB Hi-Fi Melbourne… 30 Aga… inho…  2020 Large 3048… (144.7464 -37.79908)\n# ℹ 18 more rows\n\n\n\n\nPopulation Density data\nHow to generate dots density data is explained in the next section.\nData is available for download from points_sf.zip\n\npoints_sf\n\nSimple feature collection with 57470 features and 1 field\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: 141.0321 ymin: -38.87474 xmax: 149.7605 ymax: -34.12203\nGeodetic CRS:  GCS_GDA2020\n# A tibble: 57,470 × 2\n     FID             geometry\n   &lt;dbl&gt;          &lt;POINT [°]&gt;\n 1     0  (143.802 -37.55391)\n 2     1  (143.804 -37.55111)\n 3     2 (143.8023 -37.54956)\n 4     3 (143.8039 -37.55215)\n 5     4 (143.7962 -37.55324)\n 6     5 (143.8123 -37.56792)\n 7     6 (143.8129 -37.56038)\n 8     7 (143.8142 -37.56515)\n 9     8 (143.8009 -37.55428)\n10     9 (143.7993 -37.55614)\n# ℹ 57,460 more rows\n\n\n\n\n\n2. Recreating the map\n\nmap &lt;- leaflet::leaflet() |&gt; \n  \n1  leaflet::addProviderTiles(\"OpenStreetMap\") |&gt;\n  \n2  leaflet::fitBounds(\n    lng1 = 144.72903, lat1 = -38.05242,\n    lng2 = 145.23470, lat2 = -37.57800\n  ) |&gt;\n\n7  leafgl::addGlPoints(\n    data = points_sf,\n    fillColor = \"orange\",\n    fillOpacity = 0.5,\n    radius = 2,\n    group = \"Population Density Dots\"\n  ) |&gt;\n  \n3  leaflet::addCircleMarkers(\n    data = fullfillmentCenter_sf,\n    group = \"After COVID\",\n    radius = ~dplyr::case_when(\n      Area == \"Small\" ~ 4,\n      Area == \"Medium\" ~ 6,\n      Area == \"Large\" ~ 8,\n      TRUE ~ 10\n    ),\n    color = ~dplyr::case_when(\n      Type == \"inhouse\" ~ \"red\",\n      Type == \"3PL\" ~ \"navy\",\n      TRUE ~ \"grey\"\n    ),\n    stroke = TRUE,\n    weight = 0.1,\n    fillOpacity = 0.5,\n    label = ~Name,\n    popup = ~paste0(\n      \"&lt;b&gt;Name:&lt;/b&gt; \", Name, \"&lt;br&gt;\",\n      \"&lt;b&gt;Size:&lt;/b&gt; \", Area, \"&lt;br&gt;\",\n      \"&lt;b&gt;Since:&lt;/b&gt; \", Since, \"&lt;br&gt;\",\n      \"&lt;b&gt;Note:&lt;/b&gt; \", Note, \"&lt;br&gt;\"\n    )\n  ) |&gt; \n  \n  leaflet::addCircleMarkers(\n    data = fullfillmentCenter_sf %&gt;% dplyr::filter(Since &lt; 2020),\n    group = \"Before COVID\",\n    radius = ~dplyr::case_when(\n      Area == \"Small\" ~ 4,\n      Area == \"Medium\" ~ 6,\n      Area == \"Large\" ~ 8,\n      TRUE ~ 10\n    ),\n    color = ~dplyr::case_when(\n      Type == \"inhouse\" ~ \"red\",\n      Type == \"3PL\" ~ \"navy\",\n      TRUE ~ \"grey\"\n    ),\n    stroke = TRUE,\n    weight = 0.1,\n    fillOpacity = 0.5,\n    label = ~Name,\n    popup = ~paste0(\n      \"&lt;b&gt;Name:&lt;/b&gt; \", Name, \"&lt;br&gt;\",\n      \"&lt;b&gt;Size:&lt;/b&gt; \", Area, \"&lt;br&gt;\",\n      \"&lt;b&gt;Since:&lt;/b&gt; \", Since, \"&lt;br&gt;\",\n      \"&lt;b&gt;Note:&lt;/b&gt; \", Note, \"&lt;br&gt;\"\n    )\n  ) |&gt; \n  \n4  leaflet::addLegend(\n    position = \"bottomright\",\n    colors = c(\"Inhouse\" = \"red\", \"3PL\" = \"navy\"),\n    labels = c(\"Inhouse\", \"3PL\"),\n    title = \"Warehouse Type\"\n  ) |&gt;\n  \n5  leaflet::addControl(\n    html = \"&lt;div style='background:white; padding:4px; font-size:12px; border-radius:4px; display:none;'&gt;\n              &lt;span style='display:inline-block; width:10px; height:10px; background:orange; border-radius:50%; margin-right:4px;'&gt;&lt;/span&gt; = 100 persons\n            &lt;/div&gt;\",\n    position = \"bottomleft\"\n  ) |&gt;\n  \n6  leaflet::addLayersControl(\n    baseGroups = c(\"After COVID\", \"Before COVID\"),\n    overlayGroups = c(\"Population Density Dots\"),\n    options = layersControlOptions(collapsed = FALSE)\n  )\n\n\n1\n\nBase Map Tiles\n\"OpenStreetMap\" was used as the base tile. You can explore more tile options by changing the provider name in addProviderTiles().\n\n2\n\nInitial Map View\nfitBounds() sets the initial view using the bounding box of Greater Melbourne.\n\n3\n\nWarehouse Markers\naddCircleMarkers() adds two sets of warehouse markers (before and after COVID), customized by: popup for details on click, color for warehouse type (e.g., 3PL vs. in-house), radius for warehouse size\n\n4\n\nLegend addLegend() displays a legend for warehouse types.\n\n5\n\nPopulation Density Key\naddControl() adds a toggleable key explaining the population density dots. It appears only when the corresponding layer is active.\n\n6\n\nLayer Control Panel\naddLayersControl() enables toggling between: Pre-COVID warehouses, Post-COVID warehouses, Population density dots\n\n7\n\nPopulation Density Dots\naddGlPoints() from the leafgl package is used to efficiently render thousands of population dots, providing better performance than addCircleMarkers() for large datasets.",
+    "crumbs": [
+      "Home",
+      "How I built this",
+      "1. Warehouse Locations Leaflet Map"
+    ]
+  }
+]

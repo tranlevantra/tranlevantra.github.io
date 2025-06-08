@@ -1,0 +1,223 @@
+---
+subtitle: "How to create a marker map with leaflet"
+format:
+  html:
+    toc: true
+    toc-depth: 5
+---
+
+::: text-center
+<iframe src="fig/fulfillmentCenterLandscape.html" width="70%" height="400px" style="border:none;">
+
+</iframe>
+:::
+
+```{r include=FALSE}
+library(tidyverse)
+library(sf)
+library(ggplot2)
+library(knitr)
+
+fullfillmentCenter_sf <- read_sf("resources/fullfillmentCenter_sf/fullfillmentCenter_sf.shp")
+points_sf <- read_sf("resources/points_sf/points_sf.shp")
+
+```
+
+::: {.callout-note collapse="true" title="Resources (to work with spatial vector data in R)"}
+
+You need R, RStudio, and some packages to get started. If you are completely new, I recommend resources from [RLadies Sydney](https://rladiessydney.org/courses/) (`BasicBasics` and `CleanItUp` units are must-read).
+
+In R, Working with tabular data using [`dplyr`](https://dplyr.tidyverse.org) package is straightforward, `|>`or`%>%` pipe operators and these functions: [`mutate`](https://dplyr.tidyverse.org/reference/mutate.html), [`select`](https://dplyr.tidyverse.org/reference/select.html), [`filter`](https://dplyr.tidyverse.org/reference/filter.html) and [`group_by`](https://dplyr.tidyverse.org/reference/group_by.html) along with 4 types of [`join`](https://dplyr.tidyverse.org/reference/mutate-joins.html) should get you far.
+
+The most popular package to work with spatial data in R is [`sf`](https://r-spatial.github.io/sf/). An `sf` object extends regular tabular data frames to include a geometry column, which contains the spatial information. Thus, a simple explanation on [how to read shapefiles](https://r-graph-gallery.com/168-load-a-shape-file-into-r.html) with `sf` should be enough to get you started. Then, those mentioned `dplyr` functions will come in handy.
+:::
+
+
+## Motivation
+
+To build maps in R, the two most popular packages are [**mapview**](https://r-spatial.github.io/mapview/) and [**leaflet**](https://rstudio.github.io/leaflet/). For this report, I chose `leaflet` due to its flexibility and customizability.
+
+Here’s the reasoning behind my choice and map design:
+
+-   To show transportation hubs and major roads → *Map tiles*
+-   To display warehouse locations with details → *Markers with popups*
+-   To distinguish warehouse sizes → *Marker size*
+-   To indicate warehouse type (3PL vs. in-house) → *Marker color*
+-   To compare pre- and post-COVID landscapes → *Two separate layers: before and after*
+-   To provide population context → *Sub-layer of population density dots* (since this is not the main focus)
+
+## Execution
+
+### 1. Preparing data
+
+#### Fullfillment Centers data
+
+Data on fulfillment centers in Greater Melbourne was collected through *manual searches on Google Maps*, *company website visits*, *news articles*, and *LinkedIn posts* for 8 piece of information:
+
+-   `Name`;
+
+-   `Address`;
+
+-   `Since` (the year the warehouse was established).
+
+-   `Type` (in-house or 3PL);
+
+-   `Area` (size of the warehouse, categorized as Small, Medium, Large);
+
+-   `Note` (any additional information about the warehouse).
+
+-   `lat`: (latitude coordinate of address);
+
+-   `lon` (longitude coordinate of address);
+
+`lon` and `lat` were obtained using the `geocode` function which retrieves latitude and longitude based on the address. Data is then turned into a sf object using `sf::st_as_sf(coords = c("lon", "lat")`
+
+```{python}
+#| code-fold: true
+#| eval: false
+import requests
+
+def geocode(address):
+    url = "https://nominatim.openstreetmap.org/search"
+    params = {
+        'q': address,
+        'format': 'json'
+    }
+    response = requests.get(url, params=params, headers={'User-Agent': 'Your App Name'})
+    if response.status_code == 200:
+        data = response.json()
+        if data:
+            return data[0]['lat'], data[0]['lon']
+    return None, None
+```
+
+Data is available for download from [`fullfillmentCenter_sf.zip`](https://github.com/tranlevantra/personal_website/blob/main/projects/Greater%20Melbourne%20Distribution%20Center%20Landscape/resources/fullfillmentCenter_sf.zip)
+
+```{r}
+fullfillmentCenter_sf
+```
+
+#### Population Density data
+
+How to generate dots density data is explained in the [next section](https://tranlevantra.github.io/personal_website/projects/Greater%20Melbourne%20Distribution%20Center%20Landscape/populationDensity.html).
+
+Data is available for download from [`points_sf.zip`](https://github.com/tranlevantra/personal_website/blob/main/projects/Greater%20Melbourne%20Distribution%20Center%20Landscape/resources/points_sf.zip)
+
+```{r}
+points_sf
+```
+
+### 2. Recreating the map
+
+```{r}
+#| eval: false
+
+map <- leaflet::leaflet() |> 
+  
+  leaflet::addProviderTiles("OpenStreetMap") |>     # <1>
+  
+  leaflet::fitBounds(                               # <2>
+    lng1 = 144.72903, lat1 = -38.05242, # <2>
+    lng2 = 145.23470, lat2 = -37.57800 # <2>
+  ) |>
+
+  leafgl::addGlPoints( # <7>
+    data = points_sf, # <7>
+    fillColor = "orange", # <7>
+    fillOpacity = 0.5, # <7>
+    radius = 2, # <7>
+    group = "Population Density Dots" # <7>
+  ) |>
+  
+  leaflet::addCircleMarkers(                   # <3>
+    data = fullfillmentCenter_sf, # <3>
+    group = "After COVID", # <3>
+    radius = ~dplyr::case_when(# <3>
+      Area == "Small" ~ 4,# <3>
+      Area == "Medium" ~ 6,# <3>
+      Area == "Large" ~ 8,# <3>
+      TRUE ~ 10# <3>
+    ),
+    color = ~dplyr::case_when( # <3>
+      Type == "inhouse" ~ "red",# <3>
+      Type == "3PL" ~ "navy",# <3>
+      TRUE ~ "grey"  # <3>
+    ),
+    stroke = TRUE,# <3>
+    weight = 0.1,# <3>
+    fillOpacity = 0.5,# <3>
+    label = ~Name,# <3>
+    popup = ~paste0(# <3>
+      "<b>Name:</b> ", Name, "<br>",# <3>
+      "<b>Size:</b> ", Area, "<br>",# <3>
+      "<b>Since:</b> ", Since, "<br>",# <3>
+      "<b>Note:</b> ", Note, "<br>"# <3>
+    )
+  ) |> 
+  
+  leaflet::addCircleMarkers(# <3>
+    data = fullfillmentCenter_sf %>% dplyr::filter(Since < 2020),# <3>
+    group = "Before COVID",# <3>
+    radius = ~dplyr::case_when(# <3>
+      Area == "Small" ~ 4,# <3>
+      Area == "Medium" ~ 6,# <3>
+      Area == "Large" ~ 8,# <3>
+      TRUE ~ 10  # <3>
+    ),
+    color = ~dplyr::case_when(# <3>
+      Type == "inhouse" ~ "red",# <3>
+      Type == "3PL" ~ "navy",# <3>
+      TRUE ~ "grey" # <3>
+    ),
+    stroke = TRUE,# <3>
+    weight = 0.1,# <3>
+    fillOpacity = 0.5,# <3>
+    label = ~Name,# <3>
+    popup = ~paste0(# <3>
+      "<b>Name:</b> ", Name, "<br>",# <3>
+      "<b>Size:</b> ", Area, "<br>",# <3>
+      "<b>Since:</b> ", Since, "<br>",# <3>
+      "<b>Note:</b> ", Note, "<br>"# <3>
+    )# <3>
+  ) |> 
+  
+  leaflet::addLegend( # <4>
+    position = "bottomright", # <4>
+    colors = c("Inhouse" = "red", "3PL" = "navy"), # <4>
+    labels = c("Inhouse", "3PL"), # <4>
+    title = "Warehouse Type" # <4>
+  ) |>
+  
+  leaflet::addControl( # <5>
+    html = "<div style='background:white; padding:4px; font-size:12px; border-radius:4px; display:none;'>
+              <span style='display:inline-block; width:10px; height:10px; background:orange; border-radius:50%; margin-right:4px;'></span> = 100 persons
+            </div>", # <5>
+    position = "bottomleft" # <5>
+  ) |>
+  
+  leaflet::addLayersControl( # <6>
+    baseGroups = c("After COVID", "Before COVID"), # <6>
+    overlayGroups = c("Population Density Dots"), # <6>
+    options = layersControlOptions(collapsed = FALSE) # <6>
+  )
+```
+
+1.  *Base Map Tiles*\
+    `"OpenStreetMap"` was used as the base tile. You can explore [more tile options](https://leaflet-extras.github.io/leaflet-providers/preview/) by changing the provider name in [`addProviderTiles()`](https://rstudio.github.io/leaflet/reference/addProviderTiles.html).
+
+2.  *Initial Map View*\
+    [`fitBounds()`](https://rstudio.github.io/leaflet/reference/fitBounds.html) sets the initial view using the bounding box of Greater Melbourne.
+
+3.  *Warehouse Markers*\
+    [`addCircleMarkers()`](https://rstudio.github.io/leaflet/reference/addCircleMarkers.html) adds two sets of warehouse markers (before and after COVID), customized by: `popup` for details on click, `color` for warehouse type (e.g., 3PL vs. in-house), `radius` for warehouse size
+
+4.  *Legend* [`addLegend()`](https://rstudio.github.io/leaflet/reference/addLegend.html) displays a legend for warehouse types.
+
+5.  *Population Density Key*\
+    [`addControl()`](https://rstudio.github.io/leaflet/reference/map-layers.html) adds a toggleable key explaining the population density dots. It appears only when the corresponding layer is active.
+
+6.  *Layer Control Panel*\
+    [`addLayersControl()`](https://rstudio.github.io/leaflet/reference/addLayersControl.html?q=addLayer#null) enables toggling between: Pre-COVID warehouses, Post-COVID warehouses, Population density dots
+
+7.  *Population Density Dots*\
+    [`addGlPoints()`](https://r-spatial.github.io/leafgl/reference/addGlPoints.html) from the `leafgl` package is used to efficiently render thousands of population dots, providing better performance than `addCircleMarkers()` for large datasets.

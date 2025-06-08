@@ -1,0 +1,68 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "**/*.qmd"
+    - "**/**/*.qmd"
+
+website:
+  title: "Tra Tran"
+  navbar:
+    left:
+      - href: home/index.qmd
+        text: Home
+      - href: about/index.qmd
+        text: About
+      - href: projects/index.qmd
+        text: Project
+      - href: blog/index.qmd
+        text: Blog
+    right:
+      - href: https://github.com/tranlevantra/personal_website
+        icon: github
+        
+  sidebar:
+      id: fullfillmentCenter
+      title: "Distribution Center Project"
+      style: docked
+      contents:
+        - section: "Report"
+          contents:
+            - text: "1. Project Overview"
+              file: projects/posts/fullfillmentCenter.qmd
+            - text: "2. Analysis"
+              file: projects/Greater Melbourne Distribution Center Landscape/analysis.qmd
+        - section: "How I built this"
+          contents:
+            - text: "1. Warehouse Locations Leaflet Map"
+              file: projects/Greater Melbourne Distribution Center Landscape/warehouseLocations.qmd
+            - text: "2. Population Density Dot Plot"
+              file: projects/Greater Melbourne Distribution Center Landscape/populationDensity.qmd
+            
+        
+    # - id: scorecard
+    #   title: "Scorecard for Australian Mortgage"
+    #   contents:
+    #     - posts/blog/index.qmd
+    #     - posts/blog/post1.qmd
+    
+  # announcement: 
+  #    icon: megaphone
+  #    content: "**I'm seeking internship/graduate/junior roles** in warehousing, operations, data analytics. Please contact [tranlevantra@gmail.com](mailto:tranlevantra@gmail.com) if you know of any opportunities. Thank you sincerely."
+  #    type: primary
+  #    position: below-navbar
+
+  
+  page-footer: 
+    center: This website is built with [Quarto](https://quarto.org/docs/websites/) and hosted on [Github Pages](https://pages.github.com)
+
+format:
+  html:
+    link-external-newwindow: true
+    link-external-icon: true
+    theme: cosmo
+    css: styles.css
+
+editor: visual
+

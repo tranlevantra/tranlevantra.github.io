@@ -1,0 +1,12 @@
+---
+title: "My Project Listing"
+subtitle: "To showcase What I have done and How I did it" 
+listing:
+  contents: posts
+  sort: "date desc"
+  type: grid
+  fields: [title, description, image]
+  categories: true
+  sort-ui: true
+  filter-ui: true
+---

@@ -1,0 +1,23 @@
+---
+title: "Tra Tran"
+about:
+  template: jolla
+  image: figures/profile.png
+  image-shape: rounded
+  image-width: 15em
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/tratran4499/
+    - icon: github
+      text: Github
+      href: https://github.com/tranlevantra
+    - icon: envelope
+      text: Email
+      href: mailto:tranlevantra@gmail.com
+    
+---
+
+I’m **Trà** — originally from **Vietnam**, now living in **Australia**. Besides */Chah/*, I also go by **Tea** (*Trà* means *tea* in Vietnamese) or **April** (my birth month).
+
+
