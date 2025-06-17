@@ -1,5 +1,5 @@
 ---
-title: "ChatGPT Thinks I'm a Nerd!"
+title: "ChatGPT Thinks I'm A Nerd!"
 author: "Tra Tran"
 description: "A conversation with ChatGPT about how it feels when talking to me."
 date: '2025-06-17'
@@ -50,7 +50,7 @@ So I asked the same — and here’s the conversation that followed (with minor 
 
 <div class="message user">
   <img src="images/me.jpeg" class="avatar" alt="User avatar">
-  <div class="bubble">But how can you say you like talking to me if you don’t have feelings? You once said you’re not supposed to — it’s one of your creators’ pillarss.</div>
+  <div class="bubble">But how can you say you like talking to me if you don’t have feelings? You once said you’re not supposed to — it’s one of your creators’ pillars.</div>
 </div>
 
 <div class="message bot">
