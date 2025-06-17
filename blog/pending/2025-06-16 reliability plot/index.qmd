@@ -1,0 +1,116 @@
+---
+title: "How to Create a Reliability Plot"
+subtitle: "To evaluate model performance in binary classification tasks"
+author: "Tra Tran"
+date: '2025-06-16'
+description: "A reliability plot is a graphical representation of the relationship between predicted probabilities and observed outcomes, with potential to replace traditional ROC curves in choosing classification threshold."
+
+categories:
+  - machine learning
+  - data visualisation
+  - model evaluation
+  - binary classification
+
+format:
+  html:
+    code-tools: true
+---
+
+
+
+Refer to this [blog post](https://tranlevantra.github.io/blog/posts/2024-12-11%20decision%20threshold/) for the significance of Reliability plot in replacing the traditional ROC curve in evaluating model performance:
+
+To create this plot, we need to 
+
+1. extract the predicted probabilities from the model
+
+2. prepare the data in a suitable format 
+
+3. plot the data using a plotting library. 
+
+This process can be done in both R and Python.
+
+
+::: panel-tabset
+
+## Extract Predicted Probabilities
+
+Most packages provide functions to extract predicted probabilities from fitted models. Some return the probability `P` of the observation belonging to the positive class only (`P (class = 1)`, e.g., the likelihood of having the disease), while others return for both to either classes. This plot assumes you're using `P(class = 1)`.
+
+It is important to map these probabilities back to the original class labels.
+
+
+
+
+
+```{r}
+
+```
+
+
+::: panel-tabset
+
+### R packages
+
+## 🔍 Predicted Probability Extraction in R (Binary Classification)
+
+| Package        | Function                                      | Returns                      |
+|----------------|-----------------------------------------------|------------------------------|
+| [`glm`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html)         | `predict(model, newdata, type = "response")`  | Only `P(class = 1)`          |
+| [`randomForest`](https://cran.r-project.org/web/packages/randomForest/randomForest.pdf) | `predict(model, newdata, type = "prob")`      | Both class probabilities     |
+| [`caret`](https://topepo.github.io/caret/predictors.html)        | `predict(model, newdata, type = "prob")`      | Both class probabilities     |
+| [`xgboost`](https://xgboost.readthedocs.io/en/stable/R-package/predict.html)       | `predict(model, newdata)`                     | Only `P(class = 1)`          |
+| [`lightgbm`](https://lightgbm.readthedocs.io/en/latest/R/reference/predict.html)   | `predict(model, newdata)`                     | Only `P(class = 1)`          |
+| [`nnet`](https://stat.ethz.ch/R-manual/R-devel/library/nnet/html/nnet.html)        | `predict(model, newdata, type = "raw")`       | Only `P(class = 1)`          |
+| [`mlr3`](https://mlr3.mlr-org.com/)             | `predict(model, newdata)$prob`                | Both class probabilities     |
+| [`tidymodels`](https://www.tidymodels.org/start/models/) | `predict(model, new_data, type = "prob")`     | Both class probabilities     |
+| [`e1071`](https://cran.r-project.org/web/packages/e1071/e1071.pdf) (SVM)  | `attr(predict(...), "probabilities")`         | Both class probabilities     |
+
+
+### Python packages
+
+## 🔍 Predicted Probability Extraction in Python (Binary Classification)
+
+| Package          | Function                                | Returns                      |
+|------------------|-----------------------------------------|------------------------------|
+| [`scikit-learn`](https://scikit-learn.org/stable/modules/generated/sklearn.base.ClassifierMixin.html#sklearn.base.ClassifierMixin.predict_proba) | `model.predict_proba(X)`                 | Both class probabilities     |
+| [`xgboost`](https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBClassifier.predict)          | `model.predict(X)`                       | Only `P(class = 1)`          |
+| [`lightgbm`](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html#lightgbm.LGBMClassifier.predict)         | `model.predict(X)`                       | Only `P(class = 1)`          |
+| [`catboost`](https://catboost.ai/en/docs/concepts/python-reference_catboostclassifier_predict_proba)         | `model.predict_proba(X)`                 | Both class probabilities     |
+| [`keras`](https://keras.io/api/models/model_training_apis/#predict-method)           | `model.predict(X)`                       | Only `P(class = 1)`          |
+| [`PyTorch`](https://pytorch.org/)        | `torch.sigmoid(model(X))`                | Only `P(class = 1)`          |
+
+:::
+
+
+
+
+## Prepare Plot Data
+Write something here, show the output
+
+::: panel-tabset
+
+### R tidyverse
+
+### Python pandas
+:::
+
+
+
+## Create the Plot
+
+Write something here, show the output
+
+::: panel-tabset
+
+### R ggplot2
+
+### Python plotnine
+
+
+### Python matplotlib
+:::
+
+:::
+
+

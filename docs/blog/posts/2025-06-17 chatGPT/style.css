@@ -1,0 +1,42 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 2em;
+}
+
+.chat-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.chat-message.user {
+  flex-direction: row;
+}
+
+.chat-message.chatgpt {
+  flex-direction: row-reverse;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
+.bubble {
+  background-color: #e0f7fa;
+  padding: 12px 16px;
+  border-radius: 12px;
+  max-width: 70%;
+  white-space: pre-line;
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+
+.chat-message.chatgpt .bubble {
+  background-color: #f1f8e9;
+}

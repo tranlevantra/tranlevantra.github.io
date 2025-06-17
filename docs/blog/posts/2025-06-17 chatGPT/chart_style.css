@@ -1,0 +1,37 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 2rem;
+  max-width: 700px;
+}
+
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background-color: #e0f7fa;
+  padding: 10px 14px;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  font-family: sans-serif;
+}
+
+.message.bot {
+  background-color: #f1f8e9;
+  align-self: flex-end;
+}
+
+.avatar {
+  width: 28px;  /* smaller size */
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.message p {
+  margin: 0;
+  line-height: 1.5;
+}

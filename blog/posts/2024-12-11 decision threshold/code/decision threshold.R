@@ -69,7 +69,7 @@ acr_plot_data |>
 
 
 # Figure 1 ----------------------------------------------------------------
-data <- read.csv("~/Documents/Github/personal_website/blog/posts/2024-12-11 decision threshold/code/data.csv")
+data <- read.csv("~/Documents/Github/tranlevantra.github.io/blog/posts/2024-12-11 decision threshold/code/data.csv")
 
 plot_data <- data |> 
   mutate(decision = ifelse(Probability >= threshold, 1, 0)) |> 
