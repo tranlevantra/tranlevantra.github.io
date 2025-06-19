@@ -27,27 +27,25 @@ The **Main Structure** of Australian Statistical Geography Standard (ASGS) ${3}^
 | **Geographic Level** | **Population Range** | **Composition** | **Primary Use** |
 |------------------|------------------|------------------|------------------|
 | Mesh Block (MB) | 30–60 dwellings | Smallest classification with 368,286 units | Foundation for all ASGS levels |
-| Statistical Area Level 1 (SA1) | 200–800 people | Built from 61,845 Mesh Blocks | Detailed Census dissemination |
-| Statistical Area Level 2 (SA2) | 3,000–25,000 people | Built from 2,475 SA1s | Community health & service stats |
-| Statistical Area Level 3 (SA3) | 30,000–130,000 people | Built from 359 SA2s | Regional planning and comparison |
-| Statistical Area Level 4 (SA4) | 100,000–500,000 people | Built from 108 SA3s | Labour force reporting |
-| State/Territory | Varies widely | Built from 9 SA4s + 1 Other Territory (OT) | National-level statistics and governance |
-| Australia |  | Built from 8 States/Territories + 1 Other Territory (OT) |  |
+| Statistical Area Level 1 (SA1) | 200–800 people | Built from Mesh Blocks with 61,845 coded units | Detailed Census dissemination |
+| Statistical Area Level 2 (SA2) | 3,000–25,000 people | Built from SA1s with 2,475 coded units | Community health & service stats |
+| Statistical Area Level 3 (SA3) | 30,000–130,000 people | Built from SA2s with 359 coded & named units | Regional planning and comparison |
+| Statistical Area Level 4 (SA4) | 100,000–500,000 people | Built from SA3s with 108 coded & named units | Labour force reporting |
+| State/Territory | Varies widely | Built from SA4s with 8 States/Territories and 1 Other Territory (OT) | National-level statistics and governance |
+| Australia |  | The highest level |  |
 
 **Source:** [ABS ASGS Edition 3](https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3)
 
 ## Interactive Map
 
-Below interactive map gives examples of how higher level aggregations are built from lower level ones.
-
-While Greater Capital City Statistical Areas (GCCSA) are not a part of the ASGS, they are built from SA4s, and are used to provide a more detailed understanding of the population distribution and characteristics within major urban areas of State and Territory.
+Below interactive map gives examples of how higher level aggregation are built from lower level ones.
 
 ::: panel-tabset
 ## Overview
 
 <figure>
 
-<iframe src="fig/overview.html" width="100%" height="300px" style="border:none;">
+<iframe src="fig/overview.html" width="100%" height="450px" style="border:none;">
 
 </iframe>
 
@@ -65,13 +63,13 @@ An overview of the Main Structure (may take a few seconds to load.
 
 <figure>
 
-<iframe src="fig/meshblock.html" width="100%" height="300px" style="border:none;">
+<iframe src="fig/meshblock.html" width="100%" height="450px" style="border:none;">
 
 </iframe>
 
-<figcaption style="text-align: center; font-size: 0.9em; color: gray;">
+<figcaption style=" font-size: 0.9em; color: gray;">
 
-Mesh Block agregations of North Melbourne - an SA2 block
+Mesh Block map of North Melbourne (an SA2 level block). Mesh Blocks are the smallest unit of ASGS, not named.
 
 </figcaption>
 
@@ -81,13 +79,13 @@ Mesh Block agregations of North Melbourne - an SA2 block
 
 <figure>
 
-<iframe src="fig/SA1.html" width="100%" height="300px" style="border:none;">
+<iframe src="fig/SA1.html" width="100%" height="450px" style="border:none;">
 
 </iframe>
 
-<figcaption style="text-align: center; font-size: 0.9em; color: gray;">
+<figcaption style=" font-size: 0.9em; color: gray;">
 
-SA1 agregations of North Melbourne - an SA2 block
+SA1 map of North Melbourne (an SA2 level block). SA1s are built from Mesh Blocks and also not named.
 
 </figcaption>
 
@@ -97,13 +95,13 @@ SA1 agregations of North Melbourne - an SA2 block
 
 <figure>
 
-<iframe src="fig/SA2.html" width="100%" height="300px" style="border:none;">
+<iframe src="fig/SA2.html" width="100%" height="450px" style="border:none;">
 
 </iframe>
 
-<figcaption style="text-align: center; font-size: 0.9em; color: gray;">
+<figcaption font-size: 0.9em; color: gray;">
 
-SA2 agregrations of Melbourne City - an SA3 block
+From this level, blocks are named, this is a SA2 map of Melbourne City (an SA3 level block).
 
 </figcaption>
 
@@ -113,13 +111,13 @@ SA2 agregrations of Melbourne City - an SA3 block
 
 <figure>
 
-<iframe src="fig/SA3.html" width="100%" height="300px" style="border:none;">
+<iframe src="fig/SA3.html" width="100%" height="450px" style="border:none;">
 
 </iframe>
 
-<figcaption style="text-align: center; font-size: 0.9em; color: gray;">
+<figcaption style=" font-size: 0.9em; color: gray;">
 
-SA3 agregrations of Melbourne-Inner - an SA4 block
+SA3 map of Melbourne-Inner (a SA4 block), which includes Essedon, Brunswick-Coburg, Darebin-South, Yarra, Melbourne City, Port Phillip and Stonnington-West.
 
 </figcaption>
 
@@ -129,13 +127,13 @@ SA3 agregrations of Melbourne-Inner - an SA4 block
 
 <figure>
 
-<iframe src="fig/SA4.html" width="100%" height="300px" style="border:none;">
+<iframe src="fig/SA4.html" width="100%" height="450px" style="border:none;">
 
 </iframe>
 
-<figcaption style="text-align: center; font-size: 0.9em; color: gray;">
+<figcaption style=" font-size: 0.9em; color: gray;">
 
-SA4 agregrations of Greater Melbourne - an SA5 block
+SA4 map of Greater Melbourne (a Greater Capital City Statistical Area - GCCSA).
 
 </figcaption>
 
@@ -145,13 +143,13 @@ SA4 agregrations of Greater Melbourne - an SA5 block
 
 <figure>
 
-<iframe src="fig/GCCSA.html" width="100%" height="300px" style="border:none;">
+<iframe src="fig/GCCSA.html" width="100%" height="450px" style="border:none;">
 
 </iframe>
 
-<figcaption style="text-align: center; font-size: 0.9em; color: gray;">
+<figcaption style=" font-size: 0.9em; color: gray;">
 
-GCCSA aggregations of Victoria (State) involve Greater Melbourne and Rest of Victoria.
+Greater Capital City Statistical Areas are used to provide a more detailed understanding of the population distribution and characteristics within major urban areas of State and Territory. Victoria (State) is divided into Greater Melbourne and Rest of Victoria.
 
 </figcaption>
 
@@ -161,13 +159,13 @@ GCCSA aggregations of Victoria (State) involve Greater Melbourne and Rest of Vic
 
 <figure>
 
-<iframe src="fig/STE.html" width="100%" height="300px" style="border:none;">
+<iframe src="fig/STE.html" width="100%" height="450px" style="border:none;">
 
 </iframe>
 
-<figcaption style="text-align: center; font-size: 0.9em; color: gray;">
+<figcaption style=" font-size: 0.9em; color: gray;">
 
-Australia involve 8 States and 1 Other Territory (OT).
+Australia State and Territory map - the highest level of ASGS, which includes 8 States/Territories and 1 Other Territory (OT). The OT is the Australian Capital Territory (ACT).
 
 </figcaption>
 
