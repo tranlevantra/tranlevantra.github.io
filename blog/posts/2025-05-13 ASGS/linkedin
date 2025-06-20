@@ -1,0 +1,9 @@
+Australian Statistical Geography Standard, Mesh Blocks, SA1, SA2, SA3, SA4 ???
+
+While working on Victoria's population density dotmap, to retrieve correct data, I spent a lot of time going through Australian breauc of statistics documents just to understand the structure of Australia's geographic units.
+
+
+To save others the time, I wrote this very short blog post as an intuitive summary of the ASGS hierarchy — a quick recap of about 7 pages from the official documentation.
+
+
+
