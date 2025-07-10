@@ -2,9 +2,9 @@
 title: "Tra Tran"
 about:
   template: jolla
-  image: figures/profile.png
+  image: figures/chibi profile.png
   image-shape: rounded
-  image-width: 15em
+  image-width: 13em
   links:
     - icon: linkedin
       text: LinkedIn
@@ -17,4 +17,7 @@ about:
       href: mailto:tranlevantra@gmail.com
 ---
 
-I’m **Trà** — originally from **Vietnam**, now living in **Australia**. Besides */Chah/*, I also go by **Tea** (*Trà* means *tea* in Vietnamese) or **April** (my birth month).
+Hi, I’m **Trần Lê Vân Trà** 🇻🇳. Besides */Chah/*, I also go by **April**.
+
+I study Statistics.
+
