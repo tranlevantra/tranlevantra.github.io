@@ -25,7 +25,7 @@ format:
 The **Main Structure** of Australian Statistical Geography Standard (ASGS) ${3}^{th}$ Edition has **7 levels**, and is developed based on the concept of a functional area - an area within which many people commute or travel to access services.
 
 | **Geographic Level** | **Population Range** | **Composition** | **Primary Use** |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | Mesh Block (MB) | 30–60 dwellings | Smallest classification with 368,286 units | Foundation for all ASGS levels |
 | Statistical Area Level 1 (SA1) | 200–800 people | Built from Mesh Blocks with 61,845 coded units | Detailed Census dissemination |
 | Statistical Area Level 2 (SA2) | 3,000–25,000 people | Built from SA1s with 2,475 coded units | Community health & service stats |
@@ -99,11 +99,13 @@ SA1 map of North Melbourne (an SA2 level block). SA1s are built from Mesh Blocks
 
 </iframe>
 
+```{=html}
 <figcaption font-size: 0.9em; color: gray;">
 
 From this level, blocks are named, this is a SA2 map of Melbourne City (an SA3 level block).
 
 </figcaption>
+```
 
 </figure>
 
