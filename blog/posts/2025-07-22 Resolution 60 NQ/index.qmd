@@ -1,0 +1,78 @@
+---
+title: "Vietnam's 2025 Trained Population Rate"
+description: An interesting finding of Vietnam's recent administrative change on our labour force.
+author: "Tra Tran"
+date: "2025-07-22"
+format:
+  html:
+    math: mathjax
+tags:
+  - spatial analysis
+  - Việt Nam
+  - Resolution60
+categories:
+  - Vietnam2025
+---
+
+::: lang-toggle-container
+<button class="lang-btn" onclick="switchLang(&#39;en&#39;)">
+
+🇬🇧 English
+
+</button>
+
+<button class="lang-btn" onclick="switchLang(&#39;vi&#39;)">
+
+🇻🇳 Tiếng Việt
+
+</button>
+:::
+
+::: {#lang-en style="display:none"}
+On July 1st 2025, Vietnam implemented [Resolution No. 60-NQ/TW](https://thuvienphapluat.vn/van-ban/EN/Bo-may-hanh-chinh/Resolution-60-NQ-TW-2025-the-eleventh-plenum-of-the-13th-Central-Committee-of-the-Communist-Party/654952/tieng-anh.aspx), merging several provinces and cities and reducing the total number of localities from 63 to 34. This major reform aims to streamline governance and improve resource allocation. One notable outcome is the rise in the proportion of trained workers [^1] in many of the newly merged provinces.
+
+![The two maps compare Vietnam’s trained population rate by province before and after the 2025 administrative mergers. Overall, the proportion of trained workers increased in several regions, particularly in the Central Highlands and South Central Coast. While major cities like Hanoi continued to show the highest rates, many previously lower-performing provinces shifted into higher categories after the merger, suggesting a more balanced distribution of skilled labour following the administrative reform](en.png)
+:::
+
+[^1]: *Trained population* refers to individuals aged 15 and over who have completed formal vocational or technical training, including college and university degrees (GSO Vietnam). *Trained population rate* is calculated as the number of trained individuals divided by the total population aged 15 and over.
+
+::: {#lang-vi}
+Ngày 1 tháng 7 năm 2025, Việt Nam chính thức thực hiện [Nghị quyết số 60-NQ/TW](https://tulieuvankien.dangcongsan.vn/he-thong-van-ban/van-ban-cua-dang/nghi-quyet-so-60-nqtw-ngay-1242025-hoi-nghi-lan-thu-11-ban-chap-hanh-trung-uong-dang-khoa-xiii-11495), tiến hành sáp nhập một số tỉnh và thành phố trực thuộc trung ương, qua đó giảm số đơn vị hành chính cấp tỉnh từ 63 xuống còn 34. Cải cách quan trọng này nhằm tinh gọn bộ máy, nâng cao hiệu quả quản lý và phân bổ nguồn lực hợp lý hơn giữa các vùng. Một trong những tác động đáng chú ý là tỷ lệ lao động qua đào tạo [^2] đã tăng rõ rệt tại nhiều tỉnh sau sáp nhập.
+
+![Hai bản đồ thể hiện sự thay đổi về tỷ lệ dân số qua đào tạo theo tỉnh, trước và sau đợt sáp nhập năm 2025. Nhìn chung, tỷ lệ lao động có trình độ đào tạo tăng lên ở nhiều khu vực, đặc biệt tại Tây Nguyên và Duyên hải Nam Trung Bộ. Trong khi các thành phố lớn như Hà Nội vẫn duy trì mức cao, thì nhiều tỉnh từng có tỷ lệ thấp nay đã chuyển sang nhóm cao hơn, cho thấy sự phân bổ lực lượng lao động có kỹ năng ngày càng đồng đều hơn sau cải cách hành chính.](vi.png)
+:::
+
+[^2]: *Dân số qua đào tạo* là những người từ 15 tuổi trở lên đã hoàn thành các chương trình đào tạo nghề hoặc kỹ thuật chính quy, bao gồm cả trình độ cao đẳng và đại học (Tổng cục Thống kê Việt Nam). *Tỷ lệ dân số qua đào tạo* được tính bằng số người qua đào tạo chia cho tổng dân số từ 15 tuổi trở lên.
+
+```{=html}
+<script>
+function switchLang(lang) {
+  document.getElementById('lang-en').style.display = (lang === 'en') ? 'block' : 'none';
+  document.getElementById('lang-vi').style.display = (lang === 'vi') ? 'block' : 'none';
+}
+</script>
+
+<style>
+.lang-toggle-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5em;
+  margin-top: 1em;
+  margin-bottom: 1.5em;
+}
+
+.lang-btn {
+  font-size: 0.9em;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.lang-btn:hover {
+  background-color: #e0e0e0;
+}
+</style>
+```
