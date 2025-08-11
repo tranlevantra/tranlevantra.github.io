@@ -1,7 +1,7 @@
 ---
 title: "Fullfillment Centers in Greater Melbourne"
 description: "A research into Fulfillment Center landscape of Greater Melbourne"
-image: "fig/fullfillmentCenter.jpeg"
+image: "fullfillmentCenter/fig/fullfillmentCenter.jpeg"
 page-layout: article
 format:
   html:

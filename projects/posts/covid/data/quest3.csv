@@ -1,0 +1,233 @@
+Vaccine Type,Country
+CanSino,Argentina
+CanSino,Ecuador
+Covaxin,Czechia
+Covaxin,European Union
+Covaxin,Portugal
+Johnson&Johnson,Australia
+Johnson&Johnson,Austria
+Johnson&Johnson,Belgium
+Johnson&Johnson,Bulgaria
+Johnson&Johnson,Canada
+Johnson&Johnson,Croatia
+Johnson&Johnson,Cyprus
+Johnson&Johnson,Czechia
+Johnson&Johnson,Denmark
+Johnson&Johnson,Estonia
+Johnson&Johnson,European Union
+Johnson&Johnson,France
+Johnson&Johnson,Germany
+Johnson&Johnson,Hungary
+Johnson&Johnson,Iceland
+Johnson&Johnson,Ireland
+Johnson&Johnson,Italy
+Johnson&Johnson,Latvia
+Johnson&Johnson,Liechtenstein
+Johnson&Johnson,Lithuania
+Johnson&Johnson,Luxembourg
+Johnson&Johnson,Malta
+Johnson&Johnson,Nepal
+Johnson&Johnson,Netherlands
+Johnson&Johnson,Norway
+Johnson&Johnson,Poland
+Johnson&Johnson,Portugal
+Johnson&Johnson,Romania
+Johnson&Johnson,Slovakia
+Johnson&Johnson,Slovenia
+Johnson&Johnson,South Africa
+Johnson&Johnson,South Korea
+Johnson&Johnson,Spain
+Johnson&Johnson,Switzerland
+Johnson&Johnson,Ukraine
+Johnson&Johnson,United States
+Medicago,Canada
+Moderna,Argentina
+Moderna,Australia
+Moderna,Austria
+Moderna,Belgium
+Moderna,Bulgaria
+Moderna,Canada
+Moderna,Croatia
+Moderna,Cyprus
+Moderna,Czechia
+Moderna,Denmark
+Moderna,England
+Moderna,Estonia
+Moderna,European Union
+Moderna,Finland
+Moderna,France
+Moderna,Germany
+Moderna,Hungary
+Moderna,Iceland
+Moderna,Ireland
+Moderna,Italy
+Moderna,Japan
+Moderna,Latvia
+Moderna,Liechtenstein
+Moderna,Lithuania
+Moderna,Luxembourg
+Moderna,Malta
+Moderna,Nepal
+Moderna,Netherlands
+Moderna,New Zealand
+Moderna,Norway
+Moderna,Peru
+Moderna,Poland
+Moderna,Portugal
+Moderna,Romania
+Moderna,Slovakia
+Moderna,Slovenia
+Moderna,South Korea
+Moderna,Spain
+Moderna,Sweden
+Moderna,Switzerland
+Moderna,Ukraine
+Moderna,United States
+Novavax,Australia
+Novavax,Austria
+Novavax,Belgium
+Novavax,Canada
+Novavax,Croatia
+Novavax,Cyprus
+Novavax,Czechia
+Novavax,Estonia
+Novavax,European Union
+Novavax,France
+Novavax,Germany
+Novavax,Ireland
+Novavax,Italy
+Novavax,Japan
+Novavax,Latvia
+Novavax,Liechtenstein
+Novavax,Luxembourg
+Novavax,Netherlands
+Novavax,Poland
+Novavax,Portugal
+Novavax,Slovakia
+Novavax,Slovenia
+Novavax,South Korea
+Novavax,Sweden
+Novavax,Switzerland
+Novavax,United States
+Oxford/AstraZeneca,Argentina
+Oxford/AstraZeneca,Australia
+Oxford/AstraZeneca,Austria
+Oxford/AstraZeneca,Belgium
+Oxford/AstraZeneca,Bulgaria
+Oxford/AstraZeneca,Canada
+Oxford/AstraZeneca,Chile
+Oxford/AstraZeneca,Croatia
+Oxford/AstraZeneca,Cyprus
+Oxford/AstraZeneca,Czechia
+Oxford/AstraZeneca,Denmark
+Oxford/AstraZeneca,Ecuador
+Oxford/AstraZeneca,England
+Oxford/AstraZeneca,Estonia
+Oxford/AstraZeneca,European Union
+Oxford/AstraZeneca,Finland
+Oxford/AstraZeneca,France
+Oxford/AstraZeneca,Germany
+Oxford/AstraZeneca,Hungary
+Oxford/AstraZeneca,Iceland
+Oxford/AstraZeneca,Ireland
+Oxford/AstraZeneca,Italy
+Oxford/AstraZeneca,Japan
+Oxford/AstraZeneca,Latvia
+Oxford/AstraZeneca,Lithuania
+Oxford/AstraZeneca,Luxembourg
+Oxford/AstraZeneca,Malta
+Oxford/AstraZeneca,Nepal
+Oxford/AstraZeneca,Netherlands
+Oxford/AstraZeneca,New Zealand
+Oxford/AstraZeneca,Norway
+Oxford/AstraZeneca,Peru
+Oxford/AstraZeneca,Poland
+Oxford/AstraZeneca,Portugal
+Oxford/AstraZeneca,Romania
+Oxford/AstraZeneca,Slovakia
+Oxford/AstraZeneca,Slovenia
+Oxford/AstraZeneca,South Korea
+Oxford/AstraZeneca,Spain
+Oxford/AstraZeneca,Sweden
+Oxford/AstraZeneca,Ukraine
+Oxford/AstraZeneca,Uruguay
+Pfizer/BioNTech,Argentina
+Pfizer/BioNTech,Australia
+Pfizer/BioNTech,Austria
+Pfizer/BioNTech,Belgium
+Pfizer/BioNTech,Bulgaria
+Pfizer/BioNTech,Canada
+Pfizer/BioNTech,Chile
+Pfizer/BioNTech,Croatia
+Pfizer/BioNTech,Cyprus
+Pfizer/BioNTech,Czechia
+Pfizer/BioNTech,Denmark
+Pfizer/BioNTech,Ecuador
+Pfizer/BioNTech,England
+Pfizer/BioNTech,Estonia
+Pfizer/BioNTech,European Union
+Pfizer/BioNTech,Finland
+Pfizer/BioNTech,France
+Pfizer/BioNTech,Germany
+Pfizer/BioNTech,Hong Kong
+Pfizer/BioNTech,Hungary
+Pfizer/BioNTech,Iceland
+Pfizer/BioNTech,Ireland
+Pfizer/BioNTech,Italy
+Pfizer/BioNTech,Japan
+Pfizer/BioNTech,Latvia
+Pfizer/BioNTech,Liechtenstein
+Pfizer/BioNTech,Lithuania
+Pfizer/BioNTech,Luxembourg
+Pfizer/BioNTech,Malta
+Pfizer/BioNTech,Nepal
+Pfizer/BioNTech,Netherlands
+Pfizer/BioNTech,New Zealand
+Pfizer/BioNTech,Norway
+Pfizer/BioNTech,Peru
+Pfizer/BioNTech,Poland
+Pfizer/BioNTech,Portugal
+Pfizer/BioNTech,Romania
+Pfizer/BioNTech,Slovakia
+Pfizer/BioNTech,Slovenia
+Pfizer/BioNTech,South Africa
+Pfizer/BioNTech,South Korea
+Pfizer/BioNTech,Spain
+Pfizer/BioNTech,Sweden
+Pfizer/BioNTech,Switzerland
+Pfizer/BioNTech,Ukraine
+Pfizer/BioNTech,United States
+Pfizer/BioNTech,Uruguay
+SKYCovione,South Korea
+Sanofi/GSK,Austria
+Sanofi/GSK,European Union
+Sanofi/GSK,France
+Sanofi/GSK,Italy
+Sanofi/GSK,Portugal
+Sinopharm/Beijing,Argentina
+Sinopharm/Beijing,Czechia
+Sinopharm/Beijing,European Union
+Sinopharm/Beijing,Hungary
+Sinopharm/Beijing,Latvia
+Sinopharm/Beijing,Nepal
+Sinopharm/Beijing,Peru
+Sinopharm/Beijing,Portugal
+Sinovac,Chile
+Sinovac,Czechia
+Sinovac,Ecuador
+Sinovac,European Union
+Sinovac,Hong Kong
+Sinovac,Latvia
+Sinovac,Portugal
+Sinovac,Ukraine
+Sinovac,Uruguay
+Sputnik Light,Argentina
+Sputnik V,Argentina
+Sputnik V,Czechia
+Sputnik V,European Union
+Sputnik V,Hungary
+Sputnik V,Slovakia
+Valneva,Austria
+Valneva,Czechia
+Valneva,European Union
+Valneva,Germany
