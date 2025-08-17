@@ -1,0 +1,56 @@
+:::: panel-tabset
+### Scorecard Construction
+
+::: panel-tabset
+#### Step 1: GAM Score Calculation
+
+The scorecard is constructed using our hybrid GAM-Decision Tree model. This process begins with calculating the GAM score based on `IMP_CLAGE`, `IMP_DEROG`, and `IMP_DELINQ` (`CLAGE`, `DEROG` and `DELINQ` after imputation). The GAM score calculation starts at 0 and is adjusted as follows:
+
+| Variable   | Condition                 | GAM Adjustment               |
+|------------|---------------------------|------------------------------|
+| IMP_DELINQ | `IMP_DELINQ = 0`          | `GAM = GAM + 2.57066154046`  |
+|            | `IMP_DELINQ = 1`          | `GAM = GAM + 2.08231470274`  |
+|            | `IMP_DELINQ = 2`          | `GAM = GAM + 1.32067935856`  |
+|            | `IMP_DELINQ = 3`          | `GAM = GAM + 1.12671971708`  |
+|            | `IMP_DELINQ = 4`          | `GAM = GAM + 1.06024767261`  |
+|            | `IMP_DELINQ = 5`          | `GAM = GAM - 0.187270502707` |
+|            | `IMP_DELINQ = 6`          | `GAM = GAM - 1.16612086452`  |
+|            | `IMP_DELINQ = 7`          | `GAM = GAM - 1.12016683131`  |
+|            | `IMP_DELINQ = 8`          | `GAM = GAM - 0.815202415445` |
+|            | `IMP_DELINQ = 10`         | `GAM = GAM - 1.29377825181`  |
+|            | `IMP_DELINQ = 11`         | `GAM = GAM - 1.27805891547`  |
+| IMP_DEROG  | `IMP_DEROG = 0`           | `GAM = GAM + 2.56838053911`  |
+|            | `IMP_DEROG = 1`           | `GAM = GAM + 1.88487325753`  |
+|            | `IMP_DEROG = 2`           | `GAM = GAM + 1.36118958569`  |
+|            | `IMP_DEROG = 3`           | `GAM = GAM + 0.736978317416` |
+|            | `IMP_DEROG = 4`           | `GAM = GAM - 0.552113120056` |
+|            | `IMP_DEROG = 5`           | `GAM = GAM + 2.56128811571`  |
+|            | `IMP_DEROG = 6`           | `GAM = GAM + 1.31328913024`  |
+|            | `IMP_DEROG = 7`           | `GAM = GAM + 0.607532683746` |
+|            | `IMP_DEROG = 8`           | `GAM = GAM - 0.970189363149` |
+|            | `IMP_DEROG = 9`           | `GAM = GAM - 0.219770719014` |
+| IMP_CLAGE  | `IMP_CLAGE <= 200`        | `GAM = GAM - 0.75`           |
+|            | `200 < IMP_CLAGE <= 600`  | `GAM = GAM + 0.5`            |
+|            | `600 < IMP_CLAGE <= 1000` | `GAM = GAM + 1`              |
+|            | `IMP_CLAGE > 1000`        | `GAM = GAM - 0.5`            |
+
+#### Step 2: Classification Based on Decision Tree splits
+
+After obtaining the `GAM` score, we classify applicants into risk groups based on their `DEBTINC` and `GAM` values.
+
+The final risk classification is as follows:
+
+| DEBTINC Condition          | GAM Condition      | Risk level Classification |
+|----------------------------|--------------------|---------------------------|
+| Missing or `DEBTINC >= 45` | `GAM < 1.7`        | "High risk"               |
+| Missing or `DEBTINC >= 45` | `1.7 <= GAM < 5.5` | "Medium risk"             |
+| Missing or `DEBTINC >= 45` | `GAM >= 5.5`       | "Low-risk"                |
+| `DEBTINC < 45`             | `GAM < 1.7`        | "High risk"               |
+| `DEBTINC < 45`             | `1.7 <= GAM < 2.5` | "Medium risk"             |
+| `DEBTINC < 45`             | `GAM >= 2.5`       | "Low-risk"                |
+:::
+
+### Scorecard Performance
+
+![**High Risk**: Few applicants are classified as high risk, but all of them defaulted, indicating the scorecard’s accuracy in predicting true positives. **Low Risk**: Most applicants fall into this category, with only 38 defaults out of 446. This reflects the natural repayment tendency, suggesting the scorecard accurately captures true negatives and aligns with typical default rates, where most borrowers repay their loans. **Medium Risk**: This group has a moderate number of applicants, with more defaults (66) than non-defaults (39). This mixed outcome suggests cautious lending is needed for medium-risk applicants.](pic/Scorecard%20Performance.png)
+::::

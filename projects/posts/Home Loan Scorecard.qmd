@@ -1,0 +1,17 @@
+---
+title: "Australian Home Loan Scorecard"
+description: "Credit risk assessment for Australian home loans using machine learning techniques."
+image: "Home Loan Scorecard/SAS.avif"
+page-layout: article
+format:
+  html:
+    toc: true
+    toc-depth: 2
+sidebar: homeLoanScorecard
+---
+
+
+We would like to express our heartfelt gratitude to RMIT University and the industry organisation SAS for offering this project opportunity. We are especially thankful for the unwavering support and guidance provided by our industry supervisors, Lucy Biasi, Bushra Khalid, and Mahi Ramasubbu, whose insights have been invaluable to our work.
+
+Additionally, we extend our deepest appreciation to our academic supervisors, Prof. Dr. Irene Hudson and Assoc Prof. Dr. Yan Wang for their continuous encouragement and feedback, which have greatly enhanced the quality of our project. Thank you for inspiring us throughout this journey.
+

@@ -1,0 +1,15 @@
+This project addresses a critical need in Australia’s competitive mortgage market: empowering lenders to assess borrower risk with greater accuracy, thereby enhancing risk management and decision-making. Using SAS Viya 4.0 and the HMEQ dataset (5,690 observations), we developed a predictive scorecard tailored to identify borrowers likely to default on home loans.
+
+Our approach centered on three main objectives:
+
+-   **Data Preprocessing**: Extensive data wrangling, feature selection, and imputation were performed. From the original 12 predictors, four key variables (`DELINQ` - delinquent credit lines, `DEROG` - derogatory reports, `DEBTINC` - debt-to-income ratio, and `CLAGE` - age of oldest credit line) were selected for model development. Missing data in these predictors were carefully analyzed and addressed using advanced imputation techniques, ensuring both data integrity and model reliability.
+
+-   **Model Development and Evaluation**: To balance interpretability with predictive accuracy, we developed a hybrid Generalized Additive Model (GAM)-Decision Tree model. This hybrid structure leveraged non-linear effects from GAM for interpretability and the flexibility of decision trees to handle the informative missingness in `DEBTINC`. The final model demonstrated robust performance metrics, achieving an F1 score of 0.86 and a KS statistic of 0.68, making it a reliable foundation for scorecard creation.
+
+-   **Scorecard Construction**: Using splits of the GAM-Decision Tree model, the scorecard classifies applicants into high, medium, and low-risk categories. This segmentation offers lenders actionable insights to inform lending decisions and manage risks effectively.
+
+    -   High Risk: Applicants with a high likelihood of default.
+    -   Low Risk: The largest group, with a minimal default rate.
+    -   Medium Risk: A mixed-outcome group where further calibration may improve predictability.
+
+The scorecard is well-calibrated, with distinct behaviors observed in each risk group. It effectively captures high-risk defaulters while accurately classifying low-risk applicants, aligning with natural default rates and real-world repayment behavior where most borrowers repay their loans. With this scorecard, lenders can optimise loan origination processes, enhance risk management, and improve customer experience.

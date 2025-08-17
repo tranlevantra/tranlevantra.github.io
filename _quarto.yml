@@ -21,9 +21,9 @@ website:
     right:
       - href: https://github.com/tranlevantra/tranlevantra.github.io
         icon: github
-        
+
   sidebar:
-      id: fullfillmentCenter
+    - id: fullfillmentCenter
       title: "Distribution Center Project"
       style: docked
       contents:
@@ -39,19 +39,33 @@ website:
               file: projects/Greater Melbourne Distribution Center Landscape/warehouseLocations.qmd
             - text: "2. Population Density Dot Plot"
               file: projects/Greater Melbourne Distribution Center Landscape/populationDensity.qmd
-            
-        
-    # - id: scorecard
-    #   title: "Scorecard for Australian Mortgage"
-    #   contents:
-    #     - posts/blog/index.qmd
-    #     - posts/blog/post1.qmd
-    
-  # announcement: 
-  #    icon: megaphone
-  #    content: "**I'm seeking internship/graduate/junior roles** in warehousing, operations, data analytics. Please contact [tranlevantra@gmail.com](mailto:tranlevantra@gmail.com) if you know of any opportunities. Thank you sincerely."
-  #    type: primary
-  #    position: below-navbar
+
+    - id: homeLoanScorecard
+      title: "Home Loan Scorecard"
+      style: docked
+      contents:
+        - section: "Home Loan Scorecard"
+          contents:
+            - text: "1. Executive Summary"
+              file: projects/Home Loan Scorecard/Executive Summary.qmd
+            - text: "2. Exploratory Data Analysis"
+              file:  projects/Home Loan Scorecard/Exploratory Data Analysis.qmd
+            - section: "3. Modeling and Scorecard Development"
+              contents:
+                - text: "3.1. Feature Selection"
+                  file: projects/Home Loan Scorecard/Feature Selection.qmd
+                - text: "3.2. Missing Values and Imputation"
+                  file: projects/Home Loan Scorecard/Missing Values and Imputation.qmd
+                - text: "3.3. Model Selection"
+                  file: projects/Home Loan Scorecard/Model Selection.qmd
+                - text: "3.4. Scorecard"
+                  file: projects/Home Loan Scorecard/Scorecard.qmd
+            - text: "3. Discussion"
+              file: projects/Home Loan Scorecard/Discussion.qmd
+            - text: "4. Conclusion"
+              file: projects/Home Loan Scorecard/Conclusion.qmd
+              
+              
 
   
   page-footer: 

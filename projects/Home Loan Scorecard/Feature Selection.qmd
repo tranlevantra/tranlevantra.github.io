@@ -1,0 +1,57 @@
+Feature selection is essential for building an interpretable scorecard and preventing model overfitting.
+
+::: panel-tabset
+### Step 1: Variance Decomposition
+
+We first implemented a feature selection approach based on **variance decomposition** from one-way ANOVA. For each numeric feature, we measure how much of its total variance is explained by the class labels. Essentially,
+
+-   **Between-Group Sum of Squares (BSS)** — variation of group means from the overall mean.
+
+-   **Within-Group Sum of Squares (WSS)** — variation within each group.
+
+-   **Discriminating Power**:BSS\WSS (Fisher’s ratio)
+
+-   **Explained Variance**: BSS(BSS+WSS), equivalent to **η²** in ANOVA or **R²** in regression when the predictor is the group label.
+
+| Feature | BSS          | WSS          | Discriminating Power | Explained Variance |
+|---------|--------------|--------------|----------------------|--------------------|
+| DELINQ  | 1.673869e+02 | 2.046390e+03 | 8.179620e-02         | 7.561147e-02       |
+| DEROG   | 7.631552e+01 | 1.075363e+03 | 7.096719e-02         | 6.626458e-02       |
+| DEBTINC | 1.021754e+04 | 2.042693e+05 | 5.001997e-02         | 4.763716e-02       |
+| NINQ    | 1.284786e+02 | 8.063615e+03 | 1.593312e-02         | 1.568324e-02       |
+| CLAGE   | 2.901643e+05 | 2.295566e+07 | 1.264021e-02         | 1.248243e-02       |
+| YOJ     | 8.607138e+04 | 1.996412e+05 | 4.311304e-03         | 4.292797e-03       |
+| LOAN    | 4.556161e+08 | 4.464636e+11 | 1.020500e-03         | 1.019460e-03       |
+| VALUE   | 5.186812e+09 | 1.014004e+13 | 5.097232e-04         | 5.094635e-04       |
+| MORTDUE | 1.005756e+09 | 6.935675e+12 | 1.450121e-04         | 1.449910e-04       |
+| CLNO    | 3.172226e+01 | 3.020103e+05 | 1.053072e-04         | 1.050206e-04       |
+| REASON  | 1.433814e-02 | 7.126318e+02 | 2.011999e-05         | 2.011958e-05       |
+
+### Step 2: SAS Feature Selection Node
+
+Based on discrimination power assessment, we identify the top five critical predictors: `DELINQ`, `DEROG`, `DEBTINC`, `NINQ`, and `CLAGE`. To further refine our set of predictors, we employ various feature selection methods using the SAS Feature Selection node:
+
+-   Forward Selection
+
+-   Backward Elimination
+
+-   Bidirectional Elimination
+
+-   Bayesian Logistic Regression
+
+-   LASSO Regression
+
+The table below summarises the variables recommended by each method for further modelling:
+
+|                               | DEBTINC | CLAGE | DELINQ | DEROG | NINQ |
+|-------------------------------|---------|-------|--------|-------|------|
+| Forward Selection             | Yes     | Yes   | Yes    | Yes   | Yes  |
+| Backward Elimination          | Yes     | Yes   | Yes    | Yes   | No   |
+| Bi-directory elimination      | Yes     | Yes   | Yes    | Yes   | No   |
+| Bayesian Logistics Regression | Yes     | Yes   | Yes    | Yes   | No   |
+| LASSO Regression              | Yes     | Yes   | Yes    | Yes   | No   |
+:::
+
+::: callout-note
+Feature Selection process confirm the significance of `DELINQ`, `DEROG`, `DEBTINC`, and `CLAGE` for our model. Thus, the original twelve predictors are now reduced to four, simplifying the model and enhancing interpretability.
+:::

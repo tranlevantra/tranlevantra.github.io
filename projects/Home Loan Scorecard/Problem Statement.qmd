@@ -1,0 +1,13 @@
+
+
+In Australia’s competitive mortgage market, lenders face challenges in assessing borrower eligibility amid fluctuating economic conditions. During loan origination, decisions to approve or reject applications impact both financial institutions and home-buyers. To mitigate risks and enhance decision-making, lenders require accurate, interpretable models to identify borrowers likely to default on home loans.
+
+This project aims to develop a predictive scorecard that empowers lenders to assess borrower risk effectively, enabling informed lending decisions and enhancing risk management practices.
+
+To achieve this aim, we focus on three key objectives:
+
+-   **Data Pre-processing**: Conduct thorough exploration of the client's dataset, applying appropriate techniques for feature selection and imputation to ensure data quality and relevance.
+
+-   **Model Building, Selection & Evaluation**: Use SAS Viya 4.0 to build, evaluate, and compare model pipelines, identifying the most accurate and interpretable model for scorecard development.
+
+-   **Scorecard Building**: Develop and validate a scorecard based on the selected model.
