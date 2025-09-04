@@ -45,7 +45,7 @@ It is important to map these probabilities back to the original class labels.
 ## 🔍 Predicted Probability Extraction in R (Binary Classification)
 
 | Package | Function | Returns |
-|-----------------|----------------------------------|----------------------|
+|----|----|----|
 | [`glm`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html) | `predict(model, newdata, type = "response")` | Only `P(class = 1)` |
 | [`randomForest`](https://cran.r-project.org/web/packages/randomForest/randomForest.pdf) | `predict(model, newdata, type = "prob")` | Both class probabilities |
 | [`caret`](https://topepo.github.io/caret/predictors.html) | `predict(model, newdata, type = "prob")` | Both class probabilities |
@@ -61,7 +61,7 @@ It is important to map these probabilities back to the original class labels.
 ## 🔍 Predicted Probability Extraction in Python (Binary Classification)
 
 | Package | Function | Returns |
-|-----------------|--------------------------------|-----------------------|
+|----|----|----|
 | [`scikit-learn`](https://scikit-learn.org/stable/modules/generated/sklearn.base.ClassifierMixin.html#sklearn.base.ClassifierMixin.predict_proba) | `model.predict_proba(X)` | Both class probabilities |
 | [`xgboost`](https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBClassifier.predict) | `model.predict(X)` | Only `P(class = 1)` |
 | [`lightgbm`](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html#lightgbm.LGBMClassifier.predict) | `model.predict(X)` | Only `P(class = 1)` |

@@ -1,4 +1,3 @@
-
 ## 1. Data Description
 
 Our dataset - Home Equity (HMEQ) - was given to us by the client, containing 12 predictors and 1 target variable `BAD` (0: not defaulted, 1: defaulted). The dataset consists of 5690 observations, with 4,771 non-defaulters and 919 defaulters. Details of the dataset are as follows:

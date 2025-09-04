@@ -7,10 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tra Tran">
-<meta name="dcterms.date" content="2025-06-16">
-<meta name="description" content="A reliability plot is a graphical representation of the relationship between predicted probabilities and observed outcomes, with potential to replace traditional ROC curves in choosing classification threshold.">
+<meta name="dcterms.date" content="2025-09-04">
 
-<title>How to Create a Reliability Plot – Tra Tran</title>
+<title>Extracting Predicted Probability from a fitted ML/DL model – Tra Tran</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,7 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -159,27 +158,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">How to Create a Reliability Plot</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
-<p class="subtitle lead">To evaluate model performance in binary classification tasks</p>
+<div class="quarto-title-block"><div><h1 class="title">Extracting Predicted Probability from a fitted ML/DL model</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">To evaluate model’s calibration</p>
   <div class="quarto-categories">
     <div class="quarto-category">machine learning</div>
-    <div class="quarto-category">data visualisation</div>
     <div class="quarto-category">model evaluation</div>
-    <div class="quarto-category">binary classification</div>
   </div>
   </div>
 
-<div>
-  <div class="description">
-    A reliability plot is a graphical representation of the relationship between predicted probabilities and observed outcomes, with potential to replace traditional ROC curves in choosing classification threshold.
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
@@ -194,7 +188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 16, 2025</p>
+      <p class="date">September 4, 2025</p>
     </div>
   </div>
   
@@ -206,163 +200,100 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Refer to this <a href="https://tranlevantra.github.io/blog/posts/2024-12-11%20decision%20threshold/">blog post</a> for the significance of Reliability plot in replacing the traditional ROC curve in evaluating model performance:</p>
-<p>To create this plot, we need to</p>
-<ol type="1">
-<li><p>extract the predicted probabilities from the model</p></li>
-<li><p>prepare the data in a suitable format</p></li>
-<li><p>plot the data using a plotting library.</p></li>
-</ol>
-<p>This process can be done in both R and Python.</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Extract Predicted Probabilities</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Prepare Plot Data</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false">Create the Plot</a></li></ul>
-<div class="tab-content">
-<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
-<p>Most packages provide functions to extract predicted probabilities from fitted models. Some return the probability <code>P</code> of the observation belonging to the positive class only (<code>P (class = 1)</code>, e.g., the likelihood of having the disease), while others return for both to either classes. This plot assumes you’re using <code>P(class = 1)</code>.</p>
-<p>It is important to map these probabilities back to the original class labels.</p>
+<p>When assessing classification models, accuracy alone isn’t enough—it’s equally important to check how well the predicted probabilities reflect true event likelihoods. A well-calibrated model provides probabilities that can be trusted for decision-making.</p>
+<p>This post shows how to extract predicted probabilities from common machine learning and deep learning packages in R and Python.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">R packages</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Python packages</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<section id="predicted-probability-extraction-in-r-binary-classification" class="level2">
-<h2 class="anchored" data-anchor-id="predicted-probability-extraction-in-r-binary-classification">🔍 Predicted Probability Extraction in R (Binary Classification)</h2>
+<section id="predicted-probability-extraction-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="predicted-probability-extraction-in-r">🔍 Predicted Probability Extraction in R</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Package</th>
 <th>Function</th>
-<th>Returns</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html"><code>glm</code></a></td>
+<td><a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html">glm</a></td>
 <td><code>predict(model, newdata, type = "response")</code></td>
-<td>Only <code>P(class = 1)</code></td>
 </tr>
 <tr class="even">
-<td><a href="https://cran.r-project.org/web/packages/randomForest/randomForest.pdf"><code>randomForest</code></a></td>
+<td><a href="https://cran.r-project.org/web/packages/randomForest/randomForest.pdf">randomForest</a></td>
 <td><code>predict(model, newdata, type = "prob")</code></td>
-<td>Both class probabilities</td>
 </tr>
 <tr class="odd">
-<td><a href="https://topepo.github.io/caret/predictors.html"><code>caret</code></a></td>
+<td><a href="https://topepo.github.io/caret/predictors.html">caret</a></td>
 <td><code>predict(model, newdata, type = "prob")</code></td>
-<td>Both class probabilities</td>
 </tr>
 <tr class="even">
-<td><a href="https://xgboost.readthedocs.io/en/stable/R-package/predict.html"><code>xgboost</code></a></td>
+<td><a href="https://xgboost.readthedocs.io/en/stable/R-package/predict.html">xgboost</a></td>
 <td><code>predict(model, newdata)</code></td>
-<td>Only <code>P(class = 1)</code></td>
 </tr>
 <tr class="odd">
-<td><a href="https://lightgbm.readthedocs.io/en/latest/R/reference/predict.html"><code>lightgbm</code></a></td>
+<td><a href="https://lightgbm.readthedocs.io/en/latest/R/reference/predict.html">lightgbm</a></td>
 <td><code>predict(model, newdata)</code></td>
-<td>Only <code>P(class = 1)</code></td>
 </tr>
 <tr class="even">
-<td><a href="https://stat.ethz.ch/R-manual/R-devel/library/nnet/html/nnet.html"><code>nnet</code></a></td>
+<td><a href="https://stat.ethz.ch/R-manual/R-devel/library/nnet/html/nnet.html">nnet</a></td>
 <td><code>predict(model, newdata, type = "raw")</code></td>
-<td>Only <code>P(class = 1)</code></td>
 </tr>
 <tr class="odd">
-<td><a href="https://mlr3.mlr-org.com/"><code>mlr3</code></a></td>
+<td><a href="https://mlr3.mlr-org.com/">mlr3</a></td>
 <td><code>predict(model, newdata)$prob</code></td>
-<td>Both class probabilities</td>
 </tr>
 <tr class="even">
-<td><a href="https://www.tidymodels.org/start/models/"><code>tidymodels</code></a></td>
+<td><a href="https://www.tidymodels.org/start/models/">tidymodels</a></td>
 <td><code>predict(model, new_data, type = "prob")</code></td>
-<td>Both class probabilities</td>
 </tr>
 <tr class="odd">
-<td><a href="https://cran.r-project.org/web/packages/e1071/e1071.pdf"><code>e1071</code></a> (SVM)</td>
+<td><a href="https://cran.r-project.org/web/packages/e1071/e1071.pdf">e1071</a> (SVM)</td>
 <td><code>attr(predict(...), "probabilities")</code></td>
-<td>Both class probabilities</td>
 </tr>
 </tbody>
 </table>
 </section>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<section id="predicted-probability-extraction-in-python-binary-classification" class="level2">
-<h2 class="anchored" data-anchor-id="predicted-probability-extraction-in-python-binary-classification">🔍 Predicted Probability Extraction in Python (Binary Classification)</h2>
+<section id="predicted-probability-extraction-in-python" class="level2">
+<h2 class="anchored" data-anchor-id="predicted-probability-extraction-in-python">🔍 Predicted Probability Extraction in Python</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Package</th>
 <th>Function</th>
-<th>Returns</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://scikit-learn.org/stable/modules/generated/sklearn.base.ClassifierMixin.html#sklearn.base.ClassifierMixin.predict_proba"><code>scikit-learn</code></a></td>
+<td><a href="https://scikit-learn.org/stable/modules/generated/sklearn.base.ClassifierMixin.html#sklearn.base.ClassifierMixin.predict_proba">scikit-learn</a></td>
 <td><code>model.predict_proba(X)</code></td>
-<td>Both class probabilities</td>
 </tr>
 <tr class="even">
-<td><a href="https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBClassifier.predict"><code>xgboost</code></a></td>
+<td><a href="https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBClassifier.predict">xgboost</a></td>
 <td><code>model.predict(X)</code></td>
-<td>Only <code>P(class = 1)</code></td>
 </tr>
 <tr class="odd">
-<td><a href="https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html#lightgbm.LGBMClassifier.predict"><code>lightgbm</code></a></td>
+<td><a href="https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html#lightgbm.LGBMClassifier.predict">lightgbm</a></td>
 <td><code>model.predict(X)</code></td>
-<td>Only <code>P(class = 1)</code></td>
 </tr>
 <tr class="even">
-<td><a href="https://catboost.ai/en/docs/concepts/python-reference_catboostclassifier_predict_proba"><code>catboost</code></a></td>
+<td><a href="https://catboost.ai/en/docs/concepts/python-reference_catboostclassifier_predict_proba">catboost</a></td>
 <td><code>model.predict_proba(X)</code></td>
-<td>Both class probabilities</td>
 </tr>
 <tr class="odd">
-<td><a href="https://keras.io/api/models/model_training_apis/#predict-method"><code>keras</code></a></td>
+<td><a href="https://keras.io/api/models/model_training_apis/#predict-method">keras</a></td>
 <td><code>model.predict(X)</code></td>
-<td>Only <code>P(class = 1)</code></td>
 </tr>
 <tr class="even">
-<td><a href="https://pytorch.org/"><code>PyTorch</code></a></td>
+<td><a href="https://pytorch.org/">PyTorch</a></td>
 <td><code>torch.sigmoid(model(X))</code></td>
-<td>Only <code>P(class = 1)</code></td>
 </tr>
 </tbody>
 </table>
 </section>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
-<p>Write something here, show the output</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">R tidyverse</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Python pandas</a></li></ul>
-<div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-
-</div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-4-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-3-tab">
-<p>Write something here, show the output</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">R ggplot2</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Python plotnine</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false">Python matplotlib</a></li></ul>
-<div class="tab-content">
-<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
-
-</div>
-<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-
-</div>
-<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
-
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -846,101 +777,66 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+</script>
+<script src="https://giscus.app/client.js" data-repo="tranlevantra/tranlevantra.github.io" data-repo-id="R_kgDOO4GaFQ" data-category="General" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "How to Create a Reliability Plot"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "To evaluate model performance in binary classification tasks"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Tra Tran"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2025-06-16'</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "A reliability plot is a graphical representation of the relationship between predicted probabilities and observed outcomes, with potential to replace traditional ROC curves in choosing classification threshold."</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - machine learning</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - data visualisation</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Extracting Predicted Probability from a fitted ML/DL model"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "To evaluate model's calibration"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> " "</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "fig/versus.png"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Tra Tran"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2025-09-04'</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - machine learning</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  - model evaluation</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">  - binary classification</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>Refer to this <span class="co">[</span><span class="ot">blog post</span><span class="co">](https://tranlevantra.github.io/blog/posts/2024-12-11%20decision%20threshold/)</span> for the significance of Reliability plot in replacing the traditional ROC curve in evaluating model performance:</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>To create this plot, we need to</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>When assessing classification models, accuracy alone isn’t enough—it’s equally important to check how well the predicted probabilities reflect true event likelihoods. A well-calibrated model provides probabilities that can be trusted for decision-making.</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>This post shows how to extract predicted probabilities from common machine learning and deep learning packages in R and Python.</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>extract the predicted probabilities from the model</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>prepare the data in a suitable format</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>plot the data using a plotting library.</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>This process can be done in both R and Python.</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>:::::: panel-tabset</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Extract Predicted Probabilities</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>Most packages provide functions to extract predicted probabilities from fitted models. Some return the probability <span class="in">`P`</span> of the observation belonging to the positive class only (<span class="in">`P (class = 1)`</span>, e.g., the likelihood of having the disease), while others return for both to either classes. This plot assumes you're using <span class="in">`P(class = 1)`</span>.</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>It is important to map these probabilities back to the original class labels.</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">### R packages</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## 🔍 Predicted Probability Extraction in R</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>| Package | Function |</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>|---------|----------|</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">glm</span><span class="co">](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html)</span> | <span class="in">`predict(model, newdata, type = "response")`</span> |</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">randomForest</span><span class="co">](https://cran.r-project.org/web/packages/randomForest/randomForest.pdf)</span> | <span class="in">`predict(model, newdata, type = "prob")`</span> |</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">caret</span><span class="co">](https://topepo.github.io/caret/predictors.html)</span> | <span class="in">`predict(model, newdata, type = "prob")`</span> |</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">xgboost</span><span class="co">](https://xgboost.readthedocs.io/en/stable/R-package/predict.html)</span> | <span class="in">`predict(model, newdata)`</span> |</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">lightgbm</span><span class="co">](https://lightgbm.readthedocs.io/en/latest/R/reference/predict.html)</span> | <span class="in">`predict(model, newdata)`</span> |</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">nnet</span><span class="co">](https://stat.ethz.ch/R-manual/R-devel/library/nnet/html/nnet.html)</span> | <span class="in">`predict(model, newdata, type = "raw")`</span> |</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">mlr3</span><span class="co">](https://mlr3.mlr-org.com/)</span> | <span class="in">`predict(model, newdata)$prob`</span> |</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">tidymodels</span><span class="co">](https://www.tidymodels.org/start/models/)</span> | <span class="in">`predict(model, new_data, type = "prob")`</span> |</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">e1071</span><span class="co">](https://cran.r-project.org/web/packages/e1071/e1071.pdf)</span> (SVM) | <span class="in">`attr(predict(...), "probabilities")`</span> |</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">### Python packages</span></span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">### R packages</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## 🔍 Predicted Probability Extraction in R (Binary Classification)</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>| Package | Function | Returns |</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>|----|----|----|</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">`glm`</span><span class="co">](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html)</span> | <span class="in">`predict(model, newdata, type = "response")`</span> | Only <span class="in">`P(class = 1)`</span> |</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">`randomForest`</span><span class="co">](https://cran.r-project.org/web/packages/randomForest/randomForest.pdf)</span> | <span class="in">`predict(model, newdata, type = "prob")`</span> | Both class probabilities |</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">`caret`</span><span class="co">](https://topepo.github.io/caret/predictors.html)</span> | <span class="in">`predict(model, newdata, type = "prob")`</span> | Both class probabilities |</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">`xgboost`</span><span class="co">](https://xgboost.readthedocs.io/en/stable/R-package/predict.html)</span> | <span class="in">`predict(model, newdata)`</span> | Only <span class="in">`P(class = 1)`</span> |</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">`lightgbm`</span><span class="co">](https://lightgbm.readthedocs.io/en/latest/R/reference/predict.html)</span> | <span class="in">`predict(model, newdata)`</span> | Only <span class="in">`P(class = 1)`</span> |</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">`nnet`</span><span class="co">](https://stat.ethz.ch/R-manual/R-devel/library/nnet/html/nnet.html)</span> | <span class="in">`predict(model, newdata, type = "raw")`</span> | Only <span class="in">`P(class = 1)`</span> |</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">`mlr3`</span><span class="co">](https://mlr3.mlr-org.com/)</span> | <span class="in">`predict(model, newdata)$prob`</span> | Both class probabilities |</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">`tidymodels`</span><span class="co">](https://www.tidymodels.org/start/models/)</span> | <span class="in">`predict(model, new_data, type = "prob")`</span> | Both class probabilities |</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">`e1071`</span><span class="co">](https://cran.r-project.org/web/packages/e1071/e1071.pdf)</span> (SVM) | <span class="in">`attr(predict(...), "probabilities")`</span> | Both class probabilities |</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="fu">### Python packages</span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## 🔍 Predicted Probability Extraction in Python (Binary Classification)</span></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>| Package | Function | Returns |</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>|----|----|----|</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">`scikit-learn`</span><span class="co">](https://scikit-learn.org/stable/modules/generated/sklearn.base.ClassifierMixin.html#sklearn.base.ClassifierMixin.predict_proba)</span> | <span class="in">`model.predict_proba(X)`</span> | Both class probabilities |</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">`xgboost`</span><span class="co">](https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBClassifier.predict)</span> | <span class="in">`model.predict(X)`</span> | Only <span class="in">`P(class = 1)`</span> |</span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">`lightgbm`</span><span class="co">](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html#lightgbm.LGBMClassifier.predict)</span> | <span class="in">`model.predict(X)`</span> | Only <span class="in">`P(class = 1)`</span> |</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">`catboost`</span><span class="co">](https://catboost.ai/en/docs/concepts/python-reference_catboostclassifier_predict_proba)</span> | <span class="in">`model.predict_proba(X)`</span> | Both class probabilities |</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">`keras`</span><span class="co">](https://keras.io/api/models/model_training_apis/#predict-method)</span> | <span class="in">`model.predict(X)`</span> | Only <span class="in">`P(class = 1)`</span> |</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">`PyTorch`</span><span class="co">](https://pytorch.org/)</span> | <span class="in">`torch.sigmoid(model(X))`</span> | Only <span class="in">`P(class = 1)`</span> |</span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="fu">## Prepare Plot Data</span></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>Write something here, show the output</span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="fu">### R tidyverse</span></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="fu">### Python pandas</span></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## Create the Plot</span></span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>Write something here, show the output</span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="fu">### R ggplot2</span></span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="fu">### Python plotnine</span></span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a><span class="fu">### Python matplotlib</span></span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>::::::</span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## 🔍 Predicted Probability Extraction in Python </span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>| Package | Function |</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>|---------|----------|</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">scikit-learn</span><span class="co">](https://scikit-learn.org/stable/modules/generated/sklearn.base.ClassifierMixin.html#sklearn.base.ClassifierMixin.predict_proba)</span> | <span class="in">`model.predict_proba(X)`</span> |</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">xgboost</span><span class="co">](https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBClassifier.predict)</span> | <span class="in">`model.predict(X)`</span> |</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">lightgbm</span><span class="co">](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html#lightgbm.LGBMClassifier.predict)</span> | <span class="in">`model.predict(X)`</span> |</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">catboost</span><span class="co">](https://catboost.ai/en/docs/concepts/python-reference_catboostclassifier_predict_proba)</span> | <span class="in">`model.predict_proba(X)`</span> |</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">keras</span><span class="co">](https://keras.io/api/models/model_training_apis/#predict-method)</span> | <span class="in">`model.predict(X)`</span> |</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">PyTorch</span><span class="co">](https://pytorch.org/)</span> | <span class="in">`torch.sigmoid(model(X))`</span> |</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

@@ -4,7 +4,7 @@
     "href": "blog/index.html",
     "title": "Welcome to my Blog",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nVietnam’s 2025 Trained Population Rate\n\n\n\n\n\nAn interesting finding of Vietnam’s recent administrative change on our labour force.\n\n\n\n\n\nJuly 22, 2025\n\n\nTra Tran\n\n\n3 min\n\n\n\n\n\n\n\n\n\n\n\n\nA collection of life lessons and wisdom\n\n\n\n\n\nthat Mommy sent me. Saved here for future reflection.\n\n\n\n\n\nJuly 8, 2025\n\n\nPhật Pháp & Đời Sống\n\n\n3 min\n\n\n\n\n\n\n\n\n\n\n\n\nChatGPT Thinks I’m A Nerd!\n\n\n\n\n\nA conversation with ChatGPT about how it feels when talking to me.\n\n\n\n\n\nJune 17, 2025\n\n\nTra Tran\n\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\n\nThe Main Structure of Australian Statistical Geography Standard (ASGS) Third Edition\n\n\n\n\n\nA framework to collect, analyse and disseminate statistical data based on social geography - the distribution of people and communities, rather than administrative bounderies\n\n\n\n\n\nMay 13, 2025\n\n\nTra Tran\n\n\n3 min\n\n\n\n\n\n\n\n\n\n\n\n\nI photoshoped my Testamur\n\n\n\n\n\n\n\n\n\n\n\nDecember 18, 2024\n\n\nTra Tran\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nOn model performance assessment in binary classification tasks\n\n\n\n\n\nA reflection on the often-neglected aspects of model performance assessment in binary classification tasks\n\n\n\n\n\nDecember 11, 2024\n\n\nTra Tran\n\n\n6 min\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nExtracting Predicted Probability from a fitted ML/DL model\n\n\nTo evaluate model’s calibration\n\n\n \n\n\n\n\n\nSeptember 4, 2025\n\n\nTra Tran\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nVietnam’s 2025 Trained Population Rate\n\n\n\n\n\nAn interesting finding of Vietnam’s recent administrative change on our labour force.\n\n\n\n\n\nJuly 22, 2025\n\n\nTra Tran\n\n\n3 min\n\n\n\n\n\n\n\n\n\n\n\n\nA collection of life lessons and wisdom\n\n\n\n\n\nthat Mommy sent me. Saved here for future reflection.\n\n\n\n\n\nJuly 8, 2025\n\n\nPhật Pháp & Đời Sống\n\n\n3 min\n\n\n\n\n\n\n\n\n\n\n\n\nChatGPT Thinks I’m A Nerd!\n\n\n\n\n\nA conversation with ChatGPT about how it feels when talking to me.\n\n\n\n\n\nJune 17, 2025\n\n\nTra Tran\n\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\n\nThe Main Structure of Australian Statistical Geography Standard (ASGS) Third Edition\n\n\n\n\n\nA framework to collect, analyse and disseminate statistical data based on social geography - the distribution of people and communities, rather than administrative bounderies\n\n\n\n\n\nMay 13, 2025\n\n\nTra Tran\n\n\n3 min\n\n\n\n\n\n\n\n\n\n\n\n\nI photoshoped my Testamur\n\n\n\n\n\n\n\n\n\n\n\nDecember 18, 2024\n\n\nTra Tran\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nOn model performance assessment in binary classification tasks\n\n\n\n\n\nA reflection on the often-neglected aspects of model performance assessment in binary classification tasks\n\n\n\n\n\nDecember 11, 2024\n\n\nTra Tran\n\n\n6 min\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "home/index.html",
@@ -1058,5 +1058,47 @@
       "Home Loan Scorecard",
       "2. Exploratory Data Analysis"
     ]
+  },
+  {
+    "objectID": "blog/posts/Untitled/index.html",
+    "href": "blog/posts/Untitled/index.html",
+    "title": "Extracting Predicted Probability from a fitted ML/DL model",
+    "section": "",
+    "text": "When assessing classification models, accuracy alone isn’t enough—it’s equally important to check how well the predicted probabilities reflect true event likelihoods. A well-calibrated model provides probabilities that can be trusted for decision-making.\nThis post shows how to extract predicted probabilities from common machine learning and deep learning packages in R and Python."
+  },
+  {
+    "objectID": "blog/posts/Untitled/index.html#predicted-probability-extraction-in-r-binary-classification",
+    "href": "blog/posts/Untitled/index.html#predicted-probability-extraction-in-r-binary-classification",
+    "title": "Extracting Predicted Probability from a ML/DL model",
+    "section": "🔍 Predicted Probability Extraction in R (Binary Classification)",
+    "text": "🔍 Predicted Probability Extraction in R (Binary Classification)\n\n\n\nPackage\nFunction\nReturns\n\n\n\n\nglm\npredict(model, newdata, type = \"response\")\nOnly P(class = 1)\n\n\nrandomForest\npredict(model, newdata, type = \"prob\")\nBoth class probabilities\n\n\ncaret\npredict(model, newdata, type = \"prob\")\nBoth class probabilities\n\n\nxgboost\npredict(model, newdata)\nOnly P(class = 1)\n\n\nlightgbm\npredict(model, newdata)\nOnly P(class = 1)\n\n\nnnet\npredict(model, newdata, type = \"raw\")\nOnly P(class = 1)\n\n\nmlr3\npredict(model, newdata)$prob\nBoth class probabilities\n\n\ntidymodels\npredict(model, new_data, type = \"prob\")\nBoth class probabilities\n\n\ne1071 (SVM)\nattr(predict(...), \"probabilities\")\nBoth class probabilities"
+  },
+  {
+    "objectID": "blog/posts/Untitled/index.html#predicted-probability-extraction-in-python-binary-classification",
+    "href": "blog/posts/Untitled/index.html#predicted-probability-extraction-in-python-binary-classification",
+    "title": "Extracting Predicted Probability from a ML/DL model",
+    "section": "🔍 Predicted Probability Extraction in Python (Binary Classification)",
+    "text": "🔍 Predicted Probability Extraction in Python (Binary Classification)\n\n\n\nPackage\nFunction\nReturns\n\n\n\n\nscikit-learn\nmodel.predict_proba(X)\nBoth class probabilities\n\n\nxgboost\nmodel.predict(X)\nOnly P(class = 1)\n\n\nlightgbm\nmodel.predict(X)\nOnly P(class = 1)\n\n\ncatboost\nmodel.predict_proba(X)\nBoth class probabilities\n\n\nkeras\nmodel.predict(X)\nOnly P(class = 1)\n\n\nPyTorch\ntorch.sigmoid(model(X))\nOnly P(class = 1)"
+  },
+  {
+    "objectID": "blog/posts/Untitled/index.html#extract-predicted-probabilities",
+    "href": "blog/posts/Untitled/index.html#extract-predicted-probabilities",
+    "title": "Extracting Predicted Probability from a ML/DL model",
+    "section": "Extract Predicted Probabilities",
+    "text": "Extract Predicted Probabilities\nMost packages provide functions to extract predicted probabilities from fitted models. Some return the probability P of the observation belonging to the positive class only (P (class = 1), e.g., the likelihood of having the disease), while others return for both to either classes. This plot assumes you’re using P(class = 1).\nIt is important to map these probabilities back to the original class labels.\n\nR packagesPython packages\n\n\n\n🔍 Predicted Probability Extraction in R (Binary Classification)\n\n\n\nPackage\nFunction\nReturns\n\n\n\n\nglm\npredict(model, newdata, type = \"response\")\nOnly P(class = 1)\n\n\nrandomForest\npredict(model, newdata, type = \"prob\")\nBoth class probabilities\n\n\ncaret\npredict(model, newdata, type = \"prob\")\nBoth class probabilities\n\n\nxgboost\npredict(model, newdata)\nOnly P(class = 1)\n\n\nlightgbm\npredict(model, newdata)\nOnly P(class = 1)\n\n\nnnet\npredict(model, newdata, type = \"raw\")\nOnly P(class = 1)\n\n\nmlr3\npredict(model, newdata)$prob\nBoth class probabilities\n\n\ntidymodels\npredict(model, new_data, type = \"prob\")\nBoth class probabilities\n\n\ne1071 (SVM)\nattr(predict(...), \"probabilities\")\nBoth class probabilities\n\n\n\n\n\n\n\n🔍 Predicted Probability Extraction in Python (Binary Classification)\n\n\n\nPackage\nFunction\nReturns\n\n\n\n\nscikit-learn\nmodel.predict_proba(X)\nBoth class probabilities\n\n\nxgboost\nmodel.predict(X)\nOnly P(class = 1)\n\n\nlightgbm\nmodel.predict(X)\nOnly P(class = 1)\n\n\ncatboost\nmodel.predict_proba(X)\nBoth class probabilities\n\n\nkeras\nmodel.predict(X)\nOnly P(class = 1)\n\n\nPyTorch\ntorch.sigmoid(model(X))\nOnly P(class = 1)"
+  },
+  {
+    "objectID": "blog/posts/Untitled/index.html#predicted-probability-extraction-in-r",
+    "href": "blog/posts/Untitled/index.html#predicted-probability-extraction-in-r",
+    "title": "Extracting Predicted Probability from a fitted ML/DL model",
+    "section": "🔍 Predicted Probability Extraction in R",
+    "text": "🔍 Predicted Probability Extraction in R\n\n\n\nPackage\nFunction\n\n\n\n\nglm\npredict(model, newdata, type = \"response\")\n\n\nrandomForest\npredict(model, newdata, type = \"prob\")\n\n\ncaret\npredict(model, newdata, type = \"prob\")\n\n\nxgboost\npredict(model, newdata)\n\n\nlightgbm\npredict(model, newdata)\n\n\nnnet\npredict(model, newdata, type = \"raw\")\n\n\nmlr3\npredict(model, newdata)$prob\n\n\ntidymodels\npredict(model, new_data, type = \"prob\")\n\n\ne1071 (SVM)\nattr(predict(...), \"probabilities\")"
+  },
+  {
+    "objectID": "blog/posts/Untitled/index.html#predicted-probability-extraction-in-python",
+    "href": "blog/posts/Untitled/index.html#predicted-probability-extraction-in-python",
+    "title": "Extracting Predicted Probability from a fitted ML/DL model",
+    "section": "🔍 Predicted Probability Extraction in Python",
+    "text": "🔍 Predicted Probability Extraction in Python\n\n\n\nPackage\nFunction\n\n\n\n\nscikit-learn\nmodel.predict_proba(X)\n\n\nxgboost\nmodel.predict(X)\n\n\nlightgbm\nmodel.predict(X)\n\n\ncatboost\nmodel.predict_proba(X)\n\n\nkeras\nmodel.predict(X)\n\n\nPyTorch\ntorch.sigmoid(model(X))"
   }
 ]

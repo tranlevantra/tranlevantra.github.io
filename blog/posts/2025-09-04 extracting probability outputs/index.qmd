@@ -1,0 +1,56 @@
+---
+title: "Extracting Predicted Probability from a fitted ML/DL model"
+subtitle: "To evaluate model's calibration"
+description: " "
+image: "fig/versus.png"
+author: "Tra Tran"
+date: '2025-09-04'
+
+categories:
+  - machine learning
+  - model evaluation
+
+format:
+  html:
+    code-tools: true
+---
+
+When assessing classification models, accuracy alone isn’t enough—it’s equally important to check how well the predicted probabilities reflect true event likelihoods. A well-calibrated model provides probabilities that can be trusted for decision-making.
+
+This post shows how to extract predicted probabilities from common machine learning and deep learning packages in R and Python.
+
+
+::: panel-tabset
+### R packages
+
+## 🔍 Predicted Probability Extraction in R
+
+| Package | Function |
+|---------|----------|
+| [glm](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html) | `predict(model, newdata, type = "response")` |
+| [randomForest](https://cran.r-project.org/web/packages/randomForest/randomForest.pdf) | `predict(model, newdata, type = "prob")` |
+| [caret](https://topepo.github.io/caret/predictors.html) | `predict(model, newdata, type = "prob")` |
+| [xgboost](https://xgboost.readthedocs.io/en/stable/R-package/predict.html) | `predict(model, newdata)` |
+| [lightgbm](https://lightgbm.readthedocs.io/en/latest/R/reference/predict.html) | `predict(model, newdata)` |
+| [nnet](https://stat.ethz.ch/R-manual/R-devel/library/nnet/html/nnet.html) | `predict(model, newdata, type = "raw")` |
+| [mlr3](https://mlr3.mlr-org.com/) | `predict(model, newdata)$prob` |
+| [tidymodels](https://www.tidymodels.org/start/models/) | `predict(model, new_data, type = "prob")` |
+| [e1071](https://cran.r-project.org/web/packages/e1071/e1071.pdf) (SVM) | `attr(predict(...), "probabilities")` |
+
+
+### Python packages
+
+## 🔍 Predicted Probability Extraction in Python 
+
+| Package | Function |
+|---------|----------|
+| [scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.base.ClassifierMixin.html#sklearn.base.ClassifierMixin.predict_proba) | `model.predict_proba(X)` |
+| [xgboost](https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBClassifier.predict) | `model.predict(X)` |
+| [lightgbm](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html#lightgbm.LGBMClassifier.predict) | `model.predict(X)` |
+| [catboost](https://catboost.ai/en/docs/concepts/python-reference_catboostclassifier_predict_proba) | `model.predict_proba(X)` |
+| [keras](https://keras.io/api/models/model_training_apis/#predict-method) | `model.predict(X)` |
+| [PyTorch](https://pytorch.org/) | `torch.sigmoid(model(X))` |
+
+:::
+
+
